@@ -1,0 +1,67 @@
+---
+// src/layouts/Layout.astro
+import '../styles/global.css';
+import Analytics from '@vercel/analytics/astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string; // Cambiamos de ImageMetadata a string
+  canonicalURL?: string;
+}
+
+const { 
+  title = "SysArmor Tech | Soporte N3 Windows Server & Hardening AD",
+  description = "Servicios especializados de Nivel 3 en Windows Server, Active Directory, SecOps, Hardening e ISO 27001.",
+  image = "/images/hero-datacenter.webp", // Ruta por defecto como string
+  canonicalURL = new URL(Astro.url.pathname, "https://sysarmortech.com").href,
+} = Astro.props;
+
+// Construimos la URL de la imagen concatenando el path
+const ogImageUrl = new URL(image, "https://sysarmortech.com").href;
+
+// Esquema JSON-LD
+const schemaData = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "SysArmor Tech",
+  "image": ogImageUrl,
+  "@id": "https://sysarmortech.com",
+  "url": "https://sysarmortech.com",
+  "telephone": "+573126030958",
+  "address": { "@type": "PostalAddress", "addressLocality": "Bogotá", "addressRegion": "DC", "addressCountry": "CO" },
+  "geo": { "@type": "GeoCoordinates", "latitude": 4.60971, "longitude": -74.08175 }
+};
+---
+
+<!doctype html>
+<html lang="es" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Favicon con cache busting aplicado -->
+    <link rel="icon" type="image/png" href="/favicon.png?v=2" />
+    <meta name="generator" content={Astro.generator} />
+    
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Meta Tags Geográficos -->
+    <meta name="geo.region" content="CO-DC" />
+    <meta name="geo.placename" content="Bogotá" />
+    <meta name="geo.position" content="4.60971;-74.08175" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageUrl} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
+  </head>
+  <body class="antialiased min-h-screen">
+    <slot />
+    <Analytics />
+  </body>
+</html>

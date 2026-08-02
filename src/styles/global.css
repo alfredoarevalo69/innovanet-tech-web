@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+@theme {
+  /* Fondos principales */
+  --color-brand-dark: #0A1F44;       /* Azul cibernético (Banner / Header / Dark sections) */
+  --color-brand-card: #FFFFFF;       /* Fondo blanco para tarjetas y secciones claras */
+  
+  /* Acentos y Botones */
+  --color-brand-accent: #0052FF;     /* Azul eléctrico para CTA de alto contraste (o #D4AF37 para dorado) */
+  --color-brand-accent-hover: #003ECC;
+  --color-brand-gold: #D4AF37;       /* Dorado metálico (Logo, íconos, detalles) */
+  
+  /* Bordes */
+  --color-brand-border: #E2E8F0;     /* Borde suave para tarjetas sobre fondo blanco */
+  --color-brand-border-dark: rgba(212, 175, 55, 0.25); /* Borde dorado tenue para el Navbar/Header */
+  
+  /* Tipografía y Contraste */
+  --color-brand-text: #0A1F44;       /* Texto principal sobre fondo blanco */
+  --color-brand-text-dark: #FFFFFF;  /* Texto principal sobre fondo azul/oscuro */
+  --color-brand-muted: #4A5568;      /* Gris para texto secundario sobre blanco (Lectura WCAG) */
+  --color-brand-muted-dark: #B0B3B8; /* Gris acero para texto secundario sobre fondo azul */
+}

@@ -1,0 +1,47 @@
+<section id="contacto" class="py-20 bg-brand-card border-t border-brand-border px-4">
+  <div class="max-w-3xl mx-auto text-center space-y-8">
+    <div class="space-y-3">
+      <h2 class="text-3xl font-bold">Iniciemos una Conversación Técnica</h2>
+      <p class="text-brand-muted text-sm">
+        Déjame un mensaje con el requerimiento o problema que presenta tu infraestructura y te responderé en menos de 24 horas.
+      </p>
+    </div>
+
+    <form action="https://formsubmit.co/contacto@sysarmortech.com" method="POST" enctype="multipart/form-data" class="space-y-4 text-left">
+      <input type="hidden" name="_next" value="https://sysarmortech.com">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_subject" value="Nuevo mensaje de contacto - SysArmor Tech">
+
+      <div class="grid md:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-xs font-mono text-brand-muted mb-1">NOMBRE / EMPRESA</label>
+          <input type="text" name="name" required class="w-full bg-brand-dark border border-brand-border rounded-lg px-4 py-2.5 text-sm focus:border-brand-accent focus:outline-none" placeholder="Ej. Juan Pérez" />
+        </div>
+        <div>
+          <label class="block text-xs font-mono text-brand-muted mb-1">CORREO ELECTRÓNICO</label>
+          <input type="email" name="email" required class="w-full bg-brand-dark border border-brand-border rounded-lg px-4 py-2.5 text-sm focus:border-brand-accent focus:outline-none" placeholder="juan@empresa.com" />
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-xs font-mono text-brand-muted mb-1">DETALLE DEL REQUERIMIENTO O INCIDENTE</label>
+        <textarea name="message" rows="4" required class="w-full bg-brand-dark border border-brand-border rounded-lg px-4 py-2.5 text-sm focus:border-brand-accent focus:outline-none" placeholder="Describe brevemente el estado de tus servidores, problema de Active Directory, necesidad de Intune, etc."></textarea>
+      </div>
+
+      <!-- Campo para adjuntar imagen o documento -->
+      <div>
+        <label class="block text-xs font-mono text-brand-muted mb-1">ADJUNTAR ARCHIVO, DOCUMENTO O IMAGEN (OPCIONAL)</label>
+        <input 
+          type="file" 
+          name="attachment" 
+          accept="image/*, .pdf, .txt, .log, .doc, .docx, .xls, .xlsx, .zip, .rar" 
+          class="w-full bg-brand-dark border border-brand-border rounded-lg px-4 py-2 text-sm text-brand-muted file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-brand-accent file:text-white hover:file:bg-brand-accentHover transition-all cursor-pointer" 
+        />
+      </div>
+
+      <button type="submit" class="w-full bg-brand-accent hover:bg-brand-accentHover text-white font-medium py-3 rounded-lg transition-all text-sm">
+        Enviar Mensaje
+      </button>
+    </form>
+  </div>
+</section>

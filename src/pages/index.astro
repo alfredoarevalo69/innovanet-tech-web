@@ -1,0 +1,491 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+// --- ESTRUCTURAS DE DATOS Y DOMINIO ---
+interface ServiceItem {
+  title: string;
+  iconSvg: string;
+  features: string[];
+  ctaText: string;
+  ctaAnchor: string;
+}
+
+interface CertItem {
+  title: string;
+  iconColor: string;
+  bgColor: string;
+  colSpan?: string;
+  path: string;
+}
+
+interface ProblemItem {
+  icon: string;
+  iconColor: string;
+  title: string;
+  description: string;
+}
+
+interface CaseStudy {
+  tag: string;
+  title: string;
+  description: string;
+}
+
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+const SERVICES: ServiceItem[] = [
+  {
+    title: 'Auditoría & Hardening',
+    iconSvg: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
+    features: [
+      'Análisis de Vulnerabilidades',
+      'Hardening de Microsoft 365',
+      'Implementación de ASR y PIM'
+    ],
+    ctaText: 'Solicitar Auditoría',
+    ctaAnchor: '#contacto'
+  },
+  {
+    title: 'Soporte Nivel 3',
+    iconSvg: 'M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z M15 12a3 3 0 11-6 0 3 3 0 016 0z',
+    features: [
+      'Administración Avanzada',
+      'Automatización con PowerShell',
+      'Respaldo de Recuperación'
+    ],
+    ctaText: 'Diagnosticar N3',
+    ctaAnchor: '#contacto'
+  },
+  {
+    title: 'Migración a la Nube',
+    iconSvg: 'M3 15a4 4 0 004 4h9a5 5 0 001-.01M19 15a4 4 0 00-1-7.99A5 5 0 0012 3a5 5 0 00-4.5 2.5a4 4 0 00-1.5 7.99',
+    features: [
+      'M365 & Azure',
+      'Migración de Servidores',
+      'Backup en la Nube'
+    ],
+    ctaText: 'Planear Migración',
+    ctaAnchor: '#contacto'
+  }
+];
+
+const PROBLEMS: ProblemItem[] = [
+  {
+    icon: '⚠️',
+    iconColor: 'text-red-400',
+    title: 'Active Directory Degradado',
+    description: 'GPOs mal estructuradas, réplicas fallidas y miles de objetos inactivos que exponen la red a vulnerabilidades.'
+  },
+  {
+    icon: '🛡️',
+    iconColor: 'text-amber-400',
+    title: 'Falta de Hardening',
+    description: 'Servidores expuestos sin configuraciones de seguridad estrictamente alineadas ni remediación de vulnerabilidades críticas.'
+  },
+  {
+    icon: '⏳',
+    iconColor: 'text-blue-400',
+    title: 'Escalación N3 Compleja',
+    description: 'Incidentes que el soporte interno N1/N2 no logra resolver, deteniendo operaciones críticas de la empresa.'
+  }
+];
+
+const CERTIFICATIONS: CertItem[] = [
+  {
+    title: 'Windows Server 2025 / AD',
+    iconColor: 'text-blue-400',
+    bgColor: 'bg-blue-500/10',
+    path: 'M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01'
+  },
+  {
+    title: 'GCP Professional Cloud Eng.',
+    iconColor: 'text-emerald-400',
+    bgColor: 'bg-emerald-500/10',
+    path: 'M3 15a4 4 0 004 4h9a5 5 0 001-.01M19 15a4 4 0 00-1-7.99A5 5 0 0012 3a5 5 0 00-4.5 2.5a4 4 0 00-1.5 7.99'
+  },
+  {
+    title: 'Azure AZ-700 / AZ-104',
+    iconColor: 'text-cyan-400',
+    bgColor: 'bg-cyan-500/10',
+    path: 'M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10'
+  },
+  {
+    title: 'MS-500 Security / MS-100',
+    iconColor: 'text-red-400',
+    bgColor: 'bg-red-500/10',
+    path: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z'
+  },
+  {
+    title: 'MCSE / MCSA / ITIL V3 Framework',
+    iconColor: 'text-purple-400',
+    bgColor: 'bg-purple-500/10',
+    colSpan: 'sm:col-span-2 md:col-span-2',
+    path: 'M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z'
+  }
+];
+
+const CASE_STUDIES: CaseStudy[] = [
+  {
+    tag: 'SecOps & Endpoint Security',
+    title: 'Blindaje ASR en +500 Dispositivos',
+    description: 'Despliegue de políticas avanzadas de Attack Surface Reduction (ASR) y afinamiento en Defender para entidad pública. Visibilidad total de amenazas y reducción del 5% en falsos positivos.'
+  },
+  {
+    tag: 'Identity & Cloud Security',
+    title: 'Gobierno PIM & Automatización Entra ID',
+    description: 'Implementación de acceso Just-In-Time (PIM) en entorno Multitenant bancario y automatización con PowerShell, reduciendo el tiempo de aprovisionamiento en un 50%.'
+  },
+  {
+    tag: 'Vulnerability Management',
+    title: 'Remediación Crítica Qualys / CVE',
+    description: 'Liderazgo del ciclo de remediación sobre parques de +200 servidores Windows. Hardening de llaves de registro, parcheo complejo y mitigación sin afectación operativa.'
+  }
+];
+
+const FAQS: FAQItem[] = [
+  {
+    question: '¿Cómo se maneja el modelo de contratación y costos?',
+    answer: 'Ofrecemos modalidades por bolsa de horas para incidentes puntuales de Nivel 3 o esquemas de bolsa mensual/bolsa de proyectos para saneamiento, auditorías y hardening continuo.'
+  },
+  {
+    question: '¿Requieren acceso administrativo total a nuestra infraestructura?',
+    answer: 'Trabajamos bajo el principio de menor privilegio. Las intervenciones se realizan mediante sesiones guiadas, cuentas de administración temporales (JIT) o bajo la supervisión directa de tu equipo interno.'
+  },
+  {
+    question: '¿Cuánto tiempo toma ejecutar una evaluación o diagnóstico inicial?',
+    answer: 'La evaluación inicial de Active Directory o postura de seguridad toma entre 24 y 48 horas tras recopilar la información base. A partir de allí entregamos el plan de remediación y hardening.'
+  }
+];
+
+const currentYear = new Date().getFullYear();
+---
+
+<Layout title="SysArmor Tech | SecOps e Infraestructura Híbrida">
+
+  <!-- BARRA DE NAVEGACIÓN SUPERIOR -->
+  <header class="sticky top-0 z-50 border-b border-slate-800/80 shadow-lg custom-header">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="/" class="flex items-center gap-3">
+        <img src="/images/logo.png" alt="SysArmor Tech Logo" class="h-12 w-auto object-contain rounded-md" />
+        <span class="text-xl font-bold tracking-wider text-white uppercase">
+          SYSARMOR <span class="text-blue-500">TECH</span>
+        </span>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+        <a href="#servicios" class="hover:text-white transition-colors">Servicios</a>
+        <a href="#problema" class="hover:text-white transition-colors">Enfoque Técnico</a>
+        <a href="#casos" class="hover:text-white transition-colors">Casos de Éxito</a>
+        <a href="#faq" class="hover:text-white transition-colors">FAQ</a>
+        <a href="#contacto" class="hover:text-white transition-colors">Contacto</a>
+      </nav>
+
+      <div>
+        <a href="#contacto" class="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold transition-colors shadow-sm">
+          Evaluación Gratuita
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="space-y-20 pb-12 bg-white text-slate-800">
+
+    <!-- 1. SECCIÓN HERO -->
+    <section class="relative w-full border-b border-slate-800/80 bg-[#030f26]">
+      <div class="absolute inset-0 z-0">
+        <img 
+          src="/images/hero-datacenter.webp" 
+          alt="Infraestructura Híbrida y Datacenter - SysArmor Tech" 
+          class="w-full h-full object-cover object-center"
+          loading="eager"
+        />
+        <div class="absolute inset-0 bg-[#030f26]/75 backdrop-brightness-75"></div>
+      </div>
+
+      <div class="relative z-10 max-w-6xl mx-auto px-4 py-16 md:py-24">
+        <div class="max-w-2xl space-y-6">
+          <span class="inline-flex items-center gap-2 px-3 py-1 text-xs font-semibold rounded-full bg-blue-950/90 text-blue-300 border border-blue-500/40 shadow-sm">
+            <span class="relative flex h-2 w-2">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+            </span>
+            Soporte Especializado Nivel 3 & Hardening
+          </span>
+
+          <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-white leading-tight drop-shadow-md">
+            Blindamos y Estabilizamos tu Infraestructura Digital Crítica
+          </h1>
+
+          <p class="text-lg text-slate-200 leading-relaxed drop-shadow">
+            Senior Infrastructure & Security Engineer con +20 años de trayectoria liderando la modernización, hardening y gestión de entornos híbridos críticos (M365, Azure, GCP y Windows Server). Ingeniería de Nivel 3 para operaciones continuas y SecOps.
+          </p>
+
+          <div class="flex flex-wrap gap-4 pt-2">
+            <a href="#contacto" class="px-6 py-3 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-medium transition-colors shadow-lg shadow-blue-600/20">
+              Solicita una evaluación gratuita
+            </a>
+            <a href="#servicios" class="px-6 py-3 rounded-lg border border-slate-700 bg-slate-900/80 backdrop-blur-md hover:bg-slate-800 text-slate-200 font-medium transition-colors">
+              Ver Paquetes de Servicio
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. SERVICIOS ESPECIALIZADOS -->
+    <section id="servicios" class="max-w-6xl mx-auto px-4 space-y-12 scroll-mt-24">
+      <div class="relative flex py-5 items-center">
+        <div class="flex-grow border-t border-slate-300"></div>
+        <h2 class="flex-shrink mx-4 text-3xl font-bold text-slate-900 tracking-tight uppercase">Nuestros Servicios</h2>
+        <div class="flex-grow border-t border-slate-300"></div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {SERVICES.map((service) => (
+          <div class="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col justify-between border border-slate-200">
+            <div class="relative bg-gradient-to-b from-[#0b1a30] to-[#030f26] pt-6 pb-12 px-4 text-center">
+              <h3 class="text-xl font-bold text-white mb-2">{service.title}</h3>
+              <div class="relative z-10 my-2 flex justify-center">
+                <div class="w-16 h-16 rounded-full bg-slate-900 border-2 border-blue-500/50 flex items-center justify-center shadow-lg">
+                  <svg class="w-8 h-8 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={service.iconSvg} />
+                  </svg>
+                </div>
+              </div>
+              <div class="absolute bottom-0 left-0 right-0 overflow-hidden leading-none">
+                <svg class="relative block w-full h-8 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                  <path d="M0,0 C600,120 600,120 1200,0 L1200,120 L0,120 Z" fill="currentColor"></path>
+                </svg>
+              </div>
+            </div>
+
+            <div class="px-6 pt-2 pb-6 space-y-4 flex-1">
+              {service.features.map((feature) => (
+                <div class="flex items-center gap-3 border-b border-dashed border-slate-200 pb-3">
+                  <span class="text-red-600 font-bold text-lg">✔</span>
+                  <span class="text-slate-800 font-semibold text-sm">{feature}</span>
+                </div>
+              ))}
+            </div>
+
+            <div class="p-6 pt-0">
+              <a href={service.ctaAnchor} class="block w-full text-center py-3 px-4 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold transition-all shadow-md shadow-red-600/30">
+                {service.ctaText}
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- 3. EL PROBLEMA QUE RESUELVES -->
+    <section id="problema" class="max-w-6xl mx-auto px-4 space-y-8 scroll-mt-24">
+      <div class="text-center space-y-2">
+        <h2 class="text-3xl font-bold text-slate-900">Desafíos Críticos que Neutralizamos</h2>
+        <p class="text-slate-600">Si tu equipo enfrenta alguno de estos escenarios, necesitas intervención de Nivel 3.</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-6">
+        {PROBLEMS.map((prob) => (
+          <div class="p-6 rounded-xl bg-slate-50 border border-slate-200 space-y-3">
+            <div class={`${prob.iconColor} font-bold text-xl`}>{prob.icon}</div>
+            <h3 class="text-lg font-semibold text-slate-900">{prob.title}</h3>
+            <p class="text-sm text-slate-600">{prob.description}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- 4. BENEFICIOS -->
+    <section class="max-w-6xl mx-auto px-4 space-y-8">
+      <div class="text-center space-y-2">
+        <h2 class="text-3xl font-bold text-slate-900">Resultados Garantizados</h2>
+        <p class="text-slate-600">Más allá de la técnica, nos enfocamos en el impacto en tu operación.</p>
+      </div>
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="flex gap-4 items-start">
+          <div class="p-3 bg-blue-100 text-blue-600 rounded-lg font-bold">01</div>
+          <div>
+            <h3 class="font-bold text-slate-900 text-lg">Reducción del Riesgo Operativo</h3>
+            <p class="text-slate-600 text-sm">Cerramos vectores de ataque antes de que sean explotados, protegiendo los activos más valiosos de la organización.</p>
+          </div>
+        </div>
+        <div class="flex gap-4 items-start">
+          <div class="p-3 bg-blue-100 text-blue-600 rounded-lg font-bold">02</div>
+          <div>
+            <h3 class="font-bold text-slate-900 text-lg">Alineación Normativa</h3>
+            <p class="text-slate-600 text-sm">Preparamos tu infraestructura para auditorías de cumplimiento (ISO 27001, controles de acceso y políticas de grupo).</p>
+          </div>
+        </div>
+        <div class="flex gap-4 items-start">
+          <div class="p-3 bg-blue-100 text-blue-600 rounded-lg font-bold">03</div>
+          <div>
+            <h3 class="font-bold text-slate-900 text-lg">Continuidad de Negocio (99.9%)</h3>
+            <p class="text-slate-600 text-sm">Mantenemos la operabilidad de los servicios de identidad y servidores centrales sin interrupciones no planificadas.</p>
+          </div>
+        </div>
+        <div class="flex gap-4 items-start">
+          <div class="p-3 bg-blue-100 text-blue-600 rounded-lg font-bold">04</div>
+          <div>
+            <h3 class="font-bold text-slate-900 text-lg">Tranquilidad para la Dirección de TI</h3>
+            <p class="text-slate-600 text-sm">Cuentas con respaldo experto capacitado para responder ante emergencias de alta complejidad técnica.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. EQUIPO Y EXPERIENCIA + ESPECIALIDADES -->
+    <section class="bg-slate-50 py-16 border-y border-slate-200 space-y-12">
+      <div class="max-w-4xl mx-auto px-4 text-center space-y-6">
+        <h2 class="text-3xl font-bold text-slate-900">Liderazgo e Ingeniería Senior</h2>
+        <p class="text-slate-700 leading-relaxed">
+          SysArmor Tech es impulsado por ingenieros con más de 20 años de trayectoria gestionando infraestructuras críticas corporativas y gubernamentales. Aplicamos rigor operativo bajo principios Clean Code, automatización en PowerShell y arquitecturas orientadas a alta disponibilidad.
+        </p>
+      </div>
+
+      <div class="max-w-5xl mx-auto px-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          {CERTIFICATIONS.map((cert) => (
+            <div class={`flex items-center gap-4 py-2 px-3 rounded-lg hover:bg-slate-100 transition-colors ${cert.colSpan ?? ''}`}>
+              <div class={`p-2.5 rounded-lg ${cert.bgColor} ${cert.iconColor} shrink-0`}>
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={cert.path} />
+                </svg>
+              </div>
+              <span class="font-semibold text-slate-800 text-sm md:text-base tracking-wide">
+                {cert.title}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. CASOS DE ÉXITO -->
+    <section id="casos" class="max-w-6xl mx-auto px-4 space-y-8 scroll-mt-24">
+      <div class="text-center space-y-2">
+        <h2 class="text-3xl font-bold text-slate-900">Casos de Éxito Destacados</h2>
+        <p class="text-slate-600 text-sm">Proyectos reales con impacto medible en seguridad y operación.</p>
+      </div>
+      
+      <div class="grid md:grid-cols-3 gap-6">
+        {CASE_STUDIES.map((item) => (
+          <div class="p-6 rounded-xl bg-slate-50 border border-slate-200 space-y-3">
+            <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">{item.tag}</span>
+            <h3 class="text-lg font-bold text-slate-900">{item.title}</h3>
+            <p class="text-sm text-slate-600 leading-relaxed">{item.description}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- 7. PREGUNTAS FRECUENTES (FAQ) -->
+    <section id="faq" class="max-w-4xl mx-auto px-4 space-y-8 scroll-mt-24">
+      <div class="text-center space-y-2">
+        <h2 class="text-3xl font-bold text-slate-900">Preguntas Frecuentes</h2>
+      </div>
+      <div class="space-y-4">
+        {FAQS.map((faq) => (
+          <details class="p-4 rounded-lg bg-slate-50 border border-slate-200 group">
+            <summary class="font-semibold text-slate-900 cursor-pointer flex justify-between items-center">
+              {faq.question}
+              <span class="text-blue-600 group-open:rotate-180 transition-transform">▼</span>
+            </summary>
+            <p class="text-sm text-slate-700 mt-3">{faq.answer}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <!-- 8. SECCIÓN DE CONTACTO DIRECTO -->
+    <section id="contacto" class="max-w-4xl mx-auto px-4 text-center space-y-8 scroll-mt-24">
+      <div class="p-8 md:p-12 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-6">
+        <h2 class="text-3xl font-bold text-slate-900">Solicita tu Evaluación Gratuita</h2>
+        <p class="text-slate-600 max-w-xl mx-auto">
+          Analizamos la postura de seguridad de tu infraestructura sin costo ni compromiso. Elige la vía de contacto que prefieras:
+        </p>
+
+        <div class="flex flex-col sm:flex-row justify-center items-center gap-4 pt-2">
+          <a 
+            href="mailto:contacto@sysarmortech.com?subject=Solicitud%20de%20Evaluaci%C3%B3n%20Gratuita%20-%20SysArmor%20Tech" 
+            class="w-full sm:w-auto px-6 py-4 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-bold transition-colors flex items-center justify-center gap-3">
+            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+              <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+            </svg>
+            <span>Enviar por Correo</span>
+          </a>
+
+          <a 
+            href="https://mail.google.com/mail/?view=cm&fs=1&to=contacto@sysarmortech.com&su=Solicitud%20de%20Evaluaci%C3%B3n%20Gratuita%20-%20SysArmor%20Tech" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="w-full sm:w-auto px-6 py-4 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 text-slate-800 font-bold transition-colors flex items-center justify-center gap-3">
+            <svg class="w-5 h-5 fill-current text-red-500" viewBox="0 0 24 24">
+              <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.272H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L12 9.545l8.073-6.052c1.618-1.214 3.927-.059 3.927 1.964z"/>
+            </svg>
+            <span>Abrir en Gmail Web</span>
+          </a>
+
+          <a 
+            href="https://wa.me/573126030958?text=Hola,%20quisiera%20solicitar%20una%20evaluaci%C3%B3n%20gratuita%20de%20infraestructura%20con%20SysArmor%20Tech" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="w-full sm:w-auto px-6 py-4 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-bold transition-colors flex items-center justify-center gap-3">
+            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+              <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.888 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
+            </svg>
+            <span>WhatsApp</span>
+          </a>
+        </div>
+
+        <p class="text-xs text-slate-500 pt-2">
+          Correo directo: <span class="text-slate-900 font-mono">contacto@sysarmortech.com</span>
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- PIE DE PÁGINA (FOOTER) -->
+  <footer class="border-t border-slate-800/80 bg-[#020919] py-8 text-slate-400 text-sm">
+    <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
+      
+      <div class="flex items-center gap-2">
+        <span class="font-bold tracking-wider text-white uppercase text-xs">
+          SYSARMOR <span class="text-blue-500">TECH</span>
+        </span>
+        <span>— © {currentYear} Todos los derechos reservados.</span>
+      </div>
+
+      <div class="flex items-center gap-6 text-xs text-slate-400">
+        <a href="/privacidad" class="hover:text-white transition-colors">
+          Política de Privacidad
+        </a>
+        <span class="text-slate-700">|</span>
+        <a href="/terminos" class="hover:text-white transition-colors">
+          Términos de Servicio
+        </a>
+      </div>
+
+      <p class="text-xs text-slate-400 text-center md:text-right">
+        SecOps, Hardening e Infraestructura Híbrida de Nivel 3.
+      </p>
+
+    </div>
+  </footer>
+
+</Layout>
+
+<style is:global>
+  html {
+    scroll-behavior: smooth;
+  }
+
+  .custom-header {
+    background-color: rgba(3, 15, 38, 0.70) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    backdrop-filter: blur(12px) !important;
+  }
+</style>
