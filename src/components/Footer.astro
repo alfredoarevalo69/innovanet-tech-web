@@ -1,13 +1,14 @@
 ---
 // src/components/Footer.astro
 ---
-<footer class="bg-brand-dark border-t border-brand-border py-8 px-4">
+<!-- He reemplazado 'bg-brand-dark' por 'bg-[#020617]' para matar el tinte azul -->
+<footer class="bg-[#020617] border-t border-[#1e293b] py-8 px-4">
   <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-brand-muted">
     
     <!-- Lado Izquierdo: Marca y Copyright -->
     <div class="flex items-center gap-2">
       <span class="font-bold text-white">SYSARMOR <span class="text-brand-accent">TECH</span></span>
-      <span>— &copy; 2026 Todos los derechos reservados.</span>
+      <span class="text-slate-500">— &copy; 2026 Todos los derechos reservados.</span>
     </div>
 
     <!-- Centro: Enlaces Legales -->
@@ -18,7 +19,7 @@
     </div>
 
     <!-- Lado Derecho: Slogan -->
-    <div class="text-brand-muted">
+    <div class="text-slate-500">
       SecOps, Hardening e Infraestructura Híbrida de Nivel 3.
     </div>
 

@@ -1,6 +1,12 @@
 ---
 // src/components/FAQ.astro
-const faqs = [
+
+interface FaqItem {
+  question: string;
+  answer: string;
+}
+
+const faqs: FaqItem[] = [
   {
     question: "¿Cómo se garantiza la integridad de nuestra data durante la intervención?",
     answer: "Aplicamos principios de mínimo privilegio (Zero Trust) en todo momento. Todas nuestras intervenciones se realizan bajo acuerdos de confidencialidad (NDA) estrictos y, donde sea posible, empleamos acceso JIT (Just-In-Time) sin almacenamiento permanente de credenciales."
@@ -16,21 +22,25 @@ const faqs = [
 ];
 ---
 
-<section class="py-16 bg-gray-50 px-4">
-  <div class="max-w-3xl mx-auto space-y-8">
-    <h2 class="text-3xl font-bold text-center text-slate-900">Preguntas Frecuentes</h2>
+<section class="py-20 bg-white px-6">
+  <div class="max-w-3xl mx-auto space-y-12">
+    <h2 class="text-3xl font-bold text-neutral-900 text-center">
+      Preguntas Frecuentes
+    </h2>
     
-    <div class="space-y-4">
+    <div class="space-y-4" role="region" aria-label="Preguntas frecuentes">
       {faqs.map((faq) => (
-        <details class="group bg-white border border-slate-200 rounded-xl shadow-sm hover:shadow-md transition-shadow">
-          <summary class="flex justify-between items-center font-bold text-slate-800 p-6 cursor-pointer list-none">
-            {faq.question}
-            <span class="transition group-open:rotate-180 text-blue-600">
-              <svg fill="none" height="20" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="20"><path d="M6 9l6 6 6-6"></path></svg>
+        <details class="group bg-white border border-neutral-200 rounded-lg open:border-neutral-400 open:shadow-md transition-all duration-300">
+          <summary class="flex justify-between items-center font-bold text-neutral-900 p-6 cursor-pointer list-none hover:text-neutral-600 transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-400 rounded-lg">
+            <span>{faq.question}</span>
+            <span class="transition-transform duration-300 group-open:rotate-180 text-neutral-400 shrink-0 ml-4" aria-hidden="true">
+              <svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="20">
+                <path d="M6 9l6 6 6-6"></path>
+              </svg>
             </span>
           </summary>
-          <div class="text-slate-600 px-6 pb-6 leading-relaxed">
-            {faq.answer}
+          <div class="text-neutral-600 px-6 pb-6 leading-relaxed border-t border-neutral-100 pt-4">
+            <p>{faq.answer}</p>
           </div>
         </details>
       ))}

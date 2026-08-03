@@ -1,40 +1,49 @@
 ---
 // src/components/AutoridadTecnica.astro
 ---
-<section class="py-16 bg-white px-6">
-  <div class="max-w-5xl mx-auto">
-    <h2 class="text-3xl font-bold text-slate-900 mb-16 text-center">Trayectoria y Respaldo Técnico</h2>
+
+<section id="enfoque-tecnico" class="py-20 bg-white px-6">
+  <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
     
-    <div class="grid md:grid-cols-2 gap-12 items-center">
-      <!-- Columna 1: El porqué (La trayectoria) -->
-      <div class="space-y-6">
-        <h3 class="text-2xl font-bold text-slate-800">20+ Años de Resiliencia Operativa</h3>
-        <p class="text-slate-600 leading-relaxed">
-          He liderado la modernización de infraestructura en sectores críticos como MinTIC, Grupo Aval y Terpel. Mi enfoque combina la rigurosidad del <strong>Clean Code y principios SOLID</strong> en la automatización con la gestión estratégica de entornos híbridos de alta disponibilidad.
+    <!-- Lado Izquierdo: Contenido -->
+    <div class="space-y-6">
+      <h2 class="text-3xl font-display font-bold text-neutral-900">
+        Trayectoria y Respaldo Técnico
+      </h2>
+      
+      <div class="space-y-4 text-neutral-600 font-sans leading-relaxed">
+        <h3 class="text-xl font-bold text-neutral-900">20+ Años de Resiliencia Operativa</h3>
+        <p>
+          He liderado la modernización de infraestructura en sectores críticos como <strong class="text-neutral-900 font-bold">MinTIC, Grupo Aval y Terpel</strong>. Mi enfoque combina la rigurosidad del <strong class="text-neutral-900 font-bold">Clean Code y principios SOLID</strong> en la automatización con la gestión estratégica de entornos híbridos de alta disponibilidad.
         </p>
-        <p class="text-slate-600 leading-relaxed">
+        <p>
           No solo implemento soluciones; diseño arquitecturas que aseguran la continuidad del negocio y el cumplimiento normativo exigido en el mercado actual.
         </p>
       </div>
-
-      <!-- Columna 2: El respaldo (Certificaciones) -->
-      <div class="bg-slate-900 p-8 rounded-2xl text-white shadow-xl">
-        <h4 class="text-xl font-bold mb-6 border-b border-slate-700 pb-4">Certificaciones Vigentes</h4>
-        <ul class="space-y-4">
-          <li class="flex items-start gap-3">
-            <span class="text-blue-500 font-bold">●</span>
-            <span><strong>Cloud & Modern Infra:</strong> Google Cloud Professional Cloud Engineer, Azure AZ-700/AZ-104</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="text-blue-500 font-bold">●</span>
-            <span><strong>Seguridad & Identidad:</strong> MS-500 (Security Admin), MS-100 (Identity)</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <span class="text-blue-500 font-bold">●</span>
-            <span><strong>Core & Governance:</strong> ITIL V3 Foundation, Experiencia en Auditoría ISO 27001</span>
-          </li>
-        </ul>
-      </div>
     </div>
+
+    <!-- Lado Derecho: Tarjeta de Certificaciones -->
+    <div class="bg-neutral-900 text-white p-8 rounded-xl shadow-xl border border-neutral-800">
+      <h3 class="text-xl font-display font-bold mb-6 border-b border-neutral-800 pb-4">
+        Certificaciones Vigentes
+      </h3>
+      
+      <!-- Lista estructurada (Key-Value) para mejor legibilidad -->
+      <ul class="space-y-6">
+        <li>
+          <span class="block text-blue-400 font-bold mb-1 uppercase tracking-wider text-sm">Cloud & Modern Infra</span>
+          <p class="text-sm text-neutral-300">Google Cloud Professional Cloud Engineer, Azure AZ-700/AZ-104</p>
+        </li>
+        <li>
+          <span class="block text-blue-400 font-bold mb-1 uppercase tracking-wider text-sm">Seguridad & Identidad</span>
+          <p class="text-sm text-neutral-300">MS-500 (Security Admin), MS-100 (Identity)</p>
+        </li>
+        <li>
+          <span class="block text-blue-400 font-bold mb-1 uppercase tracking-wider text-sm">Core & Governance</span>
+          <p class="text-sm text-neutral-300">ITIL V3 Foundation, Experiencia en Auditoría ISO 27001</p>
+        </li>
+      </ul>
+    </div>
+    
   </div>
 </section>

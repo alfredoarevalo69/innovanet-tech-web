@@ -1,61 +1,67 @@
 ---
 // src/components/Services.astro
+
+const services = [
+  {
+    title: "Auditoría & Hardening",
+    icon: "🛡️",
+    items: ["Análisis de Vulnerabilidades", "Hardening de M365", "ASR y PIM"],
+    cta: "Solicitar Auditoría"
+  },
+  {
+    title: "Soporte Nivel 3",
+    icon: "⚙️",
+    items: ["Administración Avanzada", "Automatización PowerShell", "Respaldo Recuperación"],
+    cta: "Diagnosticar N3"
+  },
+  {
+    title: "Migración a la Nube",
+    icon: "☁️",
+    items: ["M365 & Azure", "Migración Servidores", "Backup en la Nube"],
+    cta: "Planear Migración"
+  }
+];
 ---
 
-<section id="servicios" class="py-16 bg-white px-4">
+<section id="servicios" class="py-16 bg-slate-100 border-t border-slate-200 px-4">
   <div class="max-w-6xl mx-auto space-y-12">
-    <h2 class="text-3xl font-bold text-center text-slate-900 border-b border-slate-200 pb-6">NUESTROS SERVICIOS</h2>
+    <h2 class="text-3xl font-display font-bold text-center text-neutral-900 pb-2">
+      NUESTROS SERVICIOS
+    </h2>
     
     <div class="grid md:grid-cols-3 gap-8">
-      
-      <!-- Auditoría -->
-      <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
-        <div class="bg-[#0f172a] text-white p-6 text-center">
-          <h3 class="text-xl font-bold mb-2">Auditoría & Hardening</h3>
-          <div class="text-3xl">🛡️</div>
-        </div>
-        <div class="p-6 space-y-4">
-          <ul class="space-y-3 text-slate-700">
-            <li class="flex items-center gap-2"><span>✅</span> Análisis de Vulnerabilidades</li>
-            <li class="flex items-center gap-2"><span>✅</span> Hardening de M365</li>
-            <li class="flex items-center gap-2"><span>✅</span> ASR y PIM</li>
-          </ul>
-          <a href="#contacto" class="block w-full bg-red-600 hover:bg-red-700 text-white text-center py-3 rounded-lg font-bold mt-6">Solicitar Auditoría</a>
-        </div>
-      </div>
+      {services.map((service) => (
+        <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 flex flex-col justify-between">
+          
+          <div>
+            <!-- Header de tarjeta -->
+            <div class="bg-neutral-900 text-white p-6 text-center">
+              <h3 class="text-xl font-display font-bold mb-2">{service.title}</h3>
+              <div class="text-3xl">{service.icon}</div>
+            </div>
+            
+            <!-- Cuerpo de tarjeta -->
+            <div class="p-6 space-y-4">
+              <ul class="space-y-3 text-neutral-700">
+                {service.items.map((item) => (
+                  <li class="flex items-center gap-2 font-sans">
+                    <span class="text-green-600 font-bold">✓</span> {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+          
+          <!-- Botón de Acción (CTA) en Azul para contraste -->
+          <div class="p-6 pt-0">
+            <a href="#contacto" 
+               class="block w-full bg-blue-600 hover:bg-blue-700 text-white text-center py-3 rounded-lg font-bold transition-all duration-300 shadow-sm">
+              {service.cta}
+            </a>
+          </div>
 
-      <!-- Soporte -->
-      <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
-        <div class="bg-[#0f172a] text-white p-6 text-center">
-          <h3 class="text-xl font-bold mb-2">Soporte Nivel 3</h3>
-          <div class="text-3xl">⚙️</div>
         </div>
-        <div class="p-6 space-y-4">
-          <ul class="space-y-3 text-slate-700">
-            <li class="flex items-center gap-2"><span>✅</span> Administración Avanzada</li>
-            <li class="flex items-center gap-2"><span>✅</span> Automatización PowerShell</li>
-            <li class="flex items-center gap-2"><span>✅</span> Respaldo Recuperación</li>
-          </ul>
-          <a href="#contacto" class="block w-full bg-red-600 hover:bg-red-700 text-white text-center py-3 rounded-lg font-bold mt-6">Diagnosticar N3</a>
-        </div>
-      </div>
-
-      <!-- Nube -->
-      <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
-        <div class="bg-[#0f172a] text-white p-6 text-center">
-          <h3 class="text-xl font-bold mb-2">Migración a la Nube</h3>
-          <div class="text-3xl">☁️</div>
-        </div>
-        <div class="p-6 space-y-4">
-          <ul class="space-y-3 text-slate-700">
-            <li class="flex items-center gap-2"><span>✅</span> M365 & Azure</li>
-            <li class="flex items-center gap-2"><span>✅</span> Migración Servidores</li>
-            <li class="flex items-center gap-2"><span>✅</span> Backup en la Nube</li>
-          </ul>
-          <a href="#contacto" class="block w-full bg-red-600 hover:bg-red-700 text-white text-center py-3 rounded-lg font-bold mt-6">Planear Migración</a>
-        </div>
-      </div>
-      
+      ))}
     </div>
   </div>
 </section>
