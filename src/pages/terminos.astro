@@ -3,61 +3,37 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="Términos del Servicio | SysArmor Tech">
-  <header class="sticky top-0 z-50 border-b border-slate-800/80 shadow-lg custom-header">
-    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-      <a href="/" class="flex items-center gap-3">
-        <img 
-          src="/images/logo.png" 
-          alt="SysArmor Tech Logo" 
-          class="h-12 w-auto object-contain rounded-md" 
-        />
-        <span class="text-xl font-bold tracking-wider text-white uppercase">
-          SYSARMOR <span class="text-blue-500">TECH</span>
-        </span>
-      </a>
-      <a href="/" class="text-sm font-medium text-slate-300 hover:text-white transition-colors">
-        ← Volver al Inicio
-      </a>
-    </div>
-  </header>
+<Layout title="Términos del Servicio | SysArmor Tech" variant="legal">
+  <article class="max-w-4xl mx-auto py-16 px-6 text-slate-200">
+    <h1 class="text-4xl font-bold mb-6 text-white">Términos del Servicio</h1>
+    <p class="mb-8 text-slate-400">Última actualización: Julio 2026</p>
 
-  <!-- Ajuste: texto general a slate-900 para contraste sobre fondo blanco -->
-  <main class="max-w-4xl mx-auto px-4 py-16 space-y-8 text-slate-900">
-    <div class="space-y-2 border-b border-slate-200 pb-6">
-      <!-- Ajuste: títulos a slate-950 -->
-      <h1 class="text-3xl font-bold text-slate-950">Términos del Servicio</h1>
-      <!-- Ajuste: fecha a slate-500 -->
-      <p class="text-sm text-slate-500">Última actualización: Julio 2026</p>
-    </div>
-
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold text-slate-950">1. Alcance de los Servicios</h2>
-      <p class="text-sm leading-relaxed">
-        SysArmor Tech ofrece servicios de consultoría, ingeniería de Nivel 3, hardening de infraestructura y administración de entornos híbridos. El alcance específico de cada intervención o proyecto se formalizará mediante un acuerdo o propuesta comercial antes de la ejecución.
+    <section class="mb-8">
+      <h2 class="text-2xl font-semibold mb-4 text-white">1. Alcance de los Servicios</h2>
+      <p class="leading-relaxed">
+        SysArmor Tech ofrece servicios especializados de consultoría, ingeniería de Nivel 3, hardening de infraestructura crítica y administración avanzada de sistemas. El alcance específico de cada intervención o proyecto se formalizará mediante un acuerdo o propuesta comercial debidamente aceptada por ambas partes.
       </p>
     </section>
 
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold text-slate-950">2. Evaluación Gratuita</h2>
-      <p class="text-sm leading-relaxed">
-        La "Evaluación Gratuita" ofrecida en este sitio web consiste en un diagnóstico de alto nivel y una revisión inicial de postura de seguridad u operabilidad. No constituye una auditoría forense exhaustiva ni obliga a ninguna de las partes a contratar servicios adicionales.
+    <section class="mb-8">
+      <h2 class="text-2xl font-semibold mb-4 text-white">2. Evaluación Gratuita</h2>
+      <p class="leading-relaxed">
+        La sesión de evaluación gratuita tiene como objetivo realizar un diagnóstico preliminar técnico. Este servicio no constituye una garantía de resolución de problemas complejos sin una fase de implementación posterior y no genera un vínculo de soporte permanente hasta la firma del contrato de servicio correspondiente.
       </p>
     </section>
 
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold text-slate-950">3. Propiedad Intelectual</h2>
-      <p class="text-sm leading-relaxed">
-        Todo el contenido, marcas y logotipos expuestos en este sitio web son propiedad de SysArmor Tech.
+    <section class="mb-8">
+      <h2 class="text-2xl font-semibold mb-4 text-white">3. Responsabilidad Técnica</h2>
+      <p class="leading-relaxed">
+        Como ingenieros de infraestructura, aplicamos las mejores prácticas de la industria y principios de seguridad (hardening). Sin embargo, el cliente es responsable de contar con respaldos (backups) actualizados antes de cualquier intervención técnica. SysArmor Tech no asume responsabilidad por pérdida de datos derivada de infraestructuras que no cumplan con políticas mínimas de resiliencia.
       </p>
     </section>
-  </main>
+
+    <section class="mb-8">
+      <h2 class="text-2xl font-semibold mb-4 text-white">4. Propiedad Intelectual</h2>
+      <p class="leading-relaxed">
+        Los scripts, automatizaciones y configuraciones desarrolladas específicamente para el cliente son propiedad del mismo una vez finalizado el pago por los servicios. Los métodos, herramientas propietarias y documentación técnica de SysArmor Tech siguen siendo propiedad intelectual exclusiva de la firma.
+      </p>
+    </section>
+  </article>
 </Layout>
-
-<style is:global>
-  .custom-header {
-    background-color: rgba(3, 15, 38, 0.70) !important;
-    -webkit-backdrop-filter: blur(12px) !important;
-    backdrop-filter: blur(12px) !important;
-  }
-</style>

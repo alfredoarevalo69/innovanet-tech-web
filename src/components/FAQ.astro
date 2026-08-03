@@ -1,0 +1,39 @@
+---
+// src/components/FAQ.astro
+const faqs = [
+  {
+    question: "¿Cómo se garantiza la integridad de nuestra data durante la intervención?",
+    answer: "Aplicamos principios de mínimo privilegio (Zero Trust) en todo momento. Todas nuestras intervenciones se realizan bajo acuerdos de confidencialidad (NDA) estrictos y, donde sea posible, empleamos acceso JIT (Just-In-Time) sin almacenamiento permanente de credenciales."
+  },
+  {
+    question: "¿Cómo se integra SysArmor con nuestro equipo de TI interno?",
+    answer: "No somos una fuerza de reemplazo, sino un brazo de soporte Nivel 3. Actuamos como un equipo extendido para gestionar incidentes complejos y automatización, permitiendo que tu equipo interno mantenga el control estratégico de la operación diaria."
+  },
+  {
+    question: "¿Qué diferencia hay entre una auditoría estándar y su evaluación técnica?",
+    answer: "Una auditoría estándar suele limitarse a un reporte de riesgos. Nuestra evaluación incluye la remediación: diagnosticamos el fallo, diseñamos el script o configuración correctiva y validamos su implementación técnica, garantizando el cierre real de la brecha."
+  }
+];
+---
+
+<section class="py-16 bg-gray-50 px-4">
+  <div class="max-w-3xl mx-auto space-y-8">
+    <h2 class="text-3xl font-bold text-center text-slate-900">Preguntas Frecuentes</h2>
+    
+    <div class="space-y-4">
+      {faqs.map((faq) => (
+        <details class="group bg-white border border-slate-200 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+          <summary class="flex justify-between items-center font-bold text-slate-800 p-6 cursor-pointer list-none">
+            {faq.question}
+            <span class="transition group-open:rotate-180 text-blue-600">
+              <svg fill="none" height="20" shape-rendering="geometricPrecision" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" viewBox="0 0 24 24" width="20"><path d="M6 9l6 6 6-6"></path></svg>
+            </span>
+          </summary>
+          <div class="text-slate-600 px-6 pb-6 leading-relaxed">
+            {faq.answer}
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

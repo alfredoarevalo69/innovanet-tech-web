@@ -3,76 +3,29 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="Política de Privacidad | SysArmor Tech">
-  <header class="sticky top-0 z-50 border-b border-slate-800/80 shadow-lg custom-header">
-    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-      <a href="/" class="flex items-center gap-3">
-        <img 
-          src="/images/logo.png" 
-          alt="SysArmor Tech Logo" 
-          class="h-12 w-auto object-contain rounded-md" 
-        />
-        <span class="text-xl font-bold tracking-wider text-white uppercase">
-          SYSARMOR <span class="text-blue-500">TECH</span>
-        </span>
-      </a>
-      <a href="/" class="text-sm font-medium text-slate-300 hover:text-white transition-colors">
-        ← Volver al Inicio
-      </a>
+<!-- AQUÍ AGREGAMOS variant="legal" -->
+<Layout title="Política de Privacidad | SysArmor Tech" variant="legal">
+  <div class="max-w-4xl mx-auto py-20 px-6 text-slate-200">
+    <h1 class="text-4xl font-bold mb-6 text-white">Política de Privacidad</h1>
+    <p class="mb-8 text-slate-400">Última actualización: Julio 2026</p>
+
+    <h2 class="text-2xl font-semibold mb-4 text-white">1. Recolección de Información</h2>
+    <p class="mb-6 leading-relaxed">
+      En SysArmor Tech recopilamos únicamente la información necesaria para ponernos en contacto con usted y evaluar las necesidades de su infraestructura digital. Los datos recolectados a través de nuestros canales de contacto (correo electrónico, formulario o WhatsApp) incluyen: nombre, dirección de correo corporativo, teléfono de contacto y detalles técnicos suministrados voluntariamente.
+    </p>
+
+    <h2 class="text-2xl font-semibold mb-4 text-white">2. Uso de la Información</h2>
+    <p class="mb-4">La información recolectada se utiliza exclusivamente para:</p>
+    <ul class="list-disc ml-6 mb-8 space-y-2 text-slate-300">
+      <li>Coordinar la sesión de Evaluación Gratuita o diagnóstico técnico.</li>
+      <li>Enviar propuestas de servicios de ingeniería, hardening o soporte Nivel 3.</li>
+      <li>Responder a consultas técnicas directas.</li>
+    </ul>
+
+    <div class="p-6 bg-blue-900/30 border border-blue-500/30 rounded-lg">
+      <p class="font-bold text-white">
+        No vendemos, alquilamos ni compartimos sus datos personales o empresariales con terceros con fines comerciales.
+      </p>
     </div>
-  </header>
-
-  <!-- Ajuste: texto general a slate-900 para contraste sobre fondo blanco -->
-  <main class="max-w-4xl mx-auto px-4 py-16 space-y-8 text-slate-900">
-    <div class="space-y-2 border-b border-slate-200 pb-6">
-      <!-- Ajuste: títulos a slate-950 -->
-      <h1 class="text-3xl font-bold text-slate-950">Política de Privacidad</h1>
-      <!-- Ajuste: fecha a slate-500 -->
-      <p class="text-sm text-slate-500">Última actualización: Julio 2026</p>
-    </div>
-
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold text-slate-950">1. Recolección de Información</h2>
-      <p class="text-sm leading-relaxed">
-        En SysArmor Tech recopilamos únicamente la información necesaria para ponernos en contacto con usted y evaluar las necesidades de su infraestructura digital. Los datos recolectados a través de nuestros canales de contacto (correo electrónico, formulario o WhatsApp) incluyen: nombre, dirección de correo corporativo, teléfono de contacto y detalles técnicos suministrados voluntariamente.
-      </p>
-    </section>
-
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold text-slate-950">2. Uso de la Información</h2>
-      <p class="text-sm leading-relaxed">
-        La información recolectada se utiliza exclusivamente para:
-      </p>
-      <ul class="list-disc list-inside text-sm space-y-2 pl-2">
-        <li>Coordinar la sesión de Evaluación Gratuita o diagnóstico técnico.</li>
-        <li>Enviar propuestas de servicios de ingeniería, hardening o soporte Nivel 3.</li>
-        <li>Responder a consultas técnicas directas.</li>
-      </ul>
-      <p class="text-sm leading-relaxed">
-        <strong>No vendemos, alquilamos ni compartimos</strong> sus datos personales o empresariales con terceros con fines comerciales.
-      </p>
-    </section>
-
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold text-slate-950">3. Confidencialidad y Seguridad</h2>
-      <p class="text-sm leading-relaxed">
-        Como firma especializada en SecOps e infraestructura crítica, aplicamos estrictos estándares de seguridad y principio de mínimo privilegio para proteger cualquier información técnica o de contacto compartida con nosotros.
-      </p>
-    </section>
-
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold text-slate-950">4. Contacto y Derechos</h2>
-      <p class="text-sm leading-relaxed">
-        Usted puede solicitar la actualización o eliminación de sus datos de contacto en cualquier momento escribiendo a <span class="text-blue-600 font-mono">contacto@sysarmortech.com</span>.
-      </p>
-    </section>
-  </main>
+  </div>
 </Layout>
-
-<style is:global>
-  .custom-header {
-    background-color: rgba(3, 15, 38, 0.70) !important;
-    -webkit-backdrop-filter: blur(12px) !important;
-    backdrop-filter: blur(12px) !important;
-  }
-</style>

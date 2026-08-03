@@ -1,94 +1,61 @@
-<section id="servicios" class="py-20 bg-brand-card/50 border-y border-brand-border px-4">
+---
+// src/components/Services.astro
+---
+
+<section id="servicios" class="py-16 bg-white px-4">
   <div class="max-w-6xl mx-auto space-y-12">
-    <div class="text-center max-w-2xl mx-auto space-y-4">
-      <h2 class="text-3xl font-bold tracking-tight">Servicios Especializados</h2>
-      <p class="text-brand-muted text-sm">
-        Soluciones de arquitectura y soporte diseñadas para mantener la continuidad operativa y la seguridad de tu empresa.
-      </p>
-    </div>
-
-    <div class="grid md:grid-cols-2 gap-8">
+    <h2 class="text-3xl font-bold text-center text-slate-900 border-b border-slate-200 pb-6">NUESTROS SERVICIOS</h2>
+    
+    <div class="grid md:grid-cols-3 gap-8">
       
-      <!-- Paquete 1 -->
-      <div class="bg-brand-card border border-brand-border hover:border-brand-accent/50 transition-all rounded-2xl p-8 flex flex-col justify-between relative overflow-hidden group">
-        <div class="space-y-6">
-          <div class="inline-block p-3 rounded-xl bg-blue-500/10 text-brand-accent font-mono text-xs font-bold">
-            PROYECTO CERRADO
-          </div>
-          <h3 class="text-2xl font-bold">Paquete 1: Audit & SecOps Hardening</h3>
-          <p class="text-brand-muted text-sm leading-relaxed">
-            Evaluación integral de postura de seguridad y salud operativa. Identificamos vulnerabilidades antes de que afecten la operación.
-          </p>
-          
-          <ul class="space-y-3 text-sm text-brand-text">
-            <li class="flex items-start gap-3">
-              <span class="text-emerald-400 font-bold">✓</span>
-              <span><strong>Hardening de SO:</strong> Aplicación de plantillas CIS/Microsoft, cierre de puertos y reducción de superficie de ataque (ASR).</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="text-emerald-400 font-bold">✓</span>
-              <span><strong>Active Directory & GPOs:</strong> Limpieza de objetos, análisis de replicación y saneamiento de directivas.</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="text-emerald-400 font-bold">✓</span>
-              <span><strong>Microsoft 365 & Entra ID:</strong> Políticas de Acceso Condicional, MFA y eliminación de autenticación legada.</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="text-emerald-400 font-bold">✓</span>
-              <span><strong>Análisis de Eventos:</strong> Detección de patrones anómalos en logs e informe ejecutivo con plan de remediación.</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="text-emerald-400 font-bold">✓</span>
-              <span><strong>Consultoría y Capacitación ISO/IEC 27001:2022:</strong> Asesoría especializada en el ciclo de vida e implementación del SGSI, acompañamiento normativo integral y capacitaciones técnicas/operativas ejecutadas por personal certificado.</span>
-            </li>
-          </ul>
+      <!-- Auditoría -->
+      <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+        <div class="bg-[#0f172a] text-white p-6 text-center">
+          <h3 class="text-xl font-bold mb-2">Auditoría & Hardening</h3>
+          <div class="text-3xl">🛡️</div>
         </div>
-
-        <div class="pt-8 mt-8 border-t border-brand-border">
-          <a href="#contacto" class="block w-full py-3 bg-brand-border hover:bg-brand-accent hover:text-white text-center rounded-lg font-medium transition-all text-sm">
-            Solicitar Auditoría
-          </a>
+        <div class="p-6 space-y-4">
+          <ul class="space-y-3 text-slate-700">
+            <li class="flex items-center gap-2"><span>✅</span> Análisis de Vulnerabilidades</li>
+            <li class="flex items-center gap-2"><span>✅</span> Hardening de M365</li>
+            <li class="flex items-center gap-2"><span>✅</span> ASR y PIM</li>
+          </ul>
+          <a href="#contacto" class="block w-full bg-red-600 hover:bg-red-700 text-white text-center py-3 rounded-lg font-bold mt-6">Solicitar Auditoría</a>
         </div>
       </div>
 
-      <!-- Paquete 2 -->
-      <div class="bg-brand-card border border-brand-border hover:border-brand-accent/50 transition-all rounded-2xl p-8 flex flex-col justify-between relative overflow-hidden group">
-        <div class="space-y-6">
-          <div class="inline-block p-3 rounded-xl bg-indigo-500/10 text-indigo-400 font-mono text-xs font-bold">
-            BOLSA DE HORAS / RECURRENTE
-          </div>
-          <h3 class="text-2xl font-bold">Paquete 2: Soporte N3 & Escalamiento Experto</h3>
-          <p class="text-brand-muted text-sm leading-relaxed">
-            Respaldo de ingeniería Senior para el departamento de TI interno. Solución de chicharrones críticos y ejecución de cambios.
-          </p>
-          
-          <ul class="space-y-3 text-sm text-brand-text">
-            <li class="flex items-start gap-3">
-              <span class="text-emerald-400 font-bold">✓</span>
-              <span><strong>Atención de Incidentes N3:</strong> Solución de fallas complejas en servidores, DNS, AD, paros de servicio y seguridad.</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="text-emerald-400 font-bold">✓</span>
-              <span><strong>Migración de Sistemas Legados & Modernización OS:</strong> Proyectos de migración y actualización desde versiones de Windows Server fuera de soporte (End-of-Life) hacia Windows Server 2022 / 2025, garantizando la continuidad del negocio y el cumplimiento de estándares de seguridad.</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="text-emerald-400 font-bold">✓</span>
-              <span><strong>Gestión de Endpoints (Intune):</strong> Despliegue de directivas de cumplimiento y distribución segura de parches.</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="text-emerald-400 font-bold">✓</span>
-              <span><strong>Soporte en Contingencias:</strong> Horas prepagadas de rápida respuesta para imprevistos operativos.</span>
-            </li>
-          </ul>
+      <!-- Soporte -->
+      <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+        <div class="bg-[#0f172a] text-white p-6 text-center">
+          <h3 class="text-xl font-bold mb-2">Soporte Nivel 3</h3>
+          <div class="text-3xl">⚙️</div>
         </div>
-
-        <div class="pt-8 mt-8 border-t border-brand-border">
-          <a href="#contacto" class="block w-full py-3 bg-brand-accent hover:bg-brand-accentHover text-white text-center rounded-lg font-medium transition-all text-sm">
-            Cotizar Bolsa de Horas
-          </a>
+        <div class="p-6 space-y-4">
+          <ul class="space-y-3 text-slate-700">
+            <li class="flex items-center gap-2"><span>✅</span> Administración Avanzada</li>
+            <li class="flex items-center gap-2"><span>✅</span> Automatización PowerShell</li>
+            <li class="flex items-center gap-2"><span>✅</span> Respaldo Recuperación</li>
+          </ul>
+          <a href="#contacto" class="block w-full bg-red-600 hover:bg-red-700 text-white text-center py-3 rounded-lg font-bold mt-6">Diagnosticar N3</a>
         </div>
       </div>
 
+      <!-- Nube -->
+      <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+        <div class="bg-[#0f172a] text-white p-6 text-center">
+          <h3 class="text-xl font-bold mb-2">Migración a la Nube</h3>
+          <div class="text-3xl">☁️</div>
+        </div>
+        <div class="p-6 space-y-4">
+          <ul class="space-y-3 text-slate-700">
+            <li class="flex items-center gap-2"><span>✅</span> M365 & Azure</li>
+            <li class="flex items-center gap-2"><span>✅</span> Migración Servidores</li>
+            <li class="flex items-center gap-2"><span>✅</span> Backup en la Nube</li>
+          </ul>
+          <a href="#contacto" class="block w-full bg-red-600 hover:bg-red-700 text-white text-center py-3 rounded-lg font-bold mt-6">Planear Migración</a>
+        </div>
+      </div>
+      
     </div>
   </div>
 </section>

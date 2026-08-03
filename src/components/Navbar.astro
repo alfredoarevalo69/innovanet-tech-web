@@ -1,35 +1,27 @@
 ---
-// Ya no necesitamos importar Image ni logo, porque usaremos la ruta pública
+// src/components/Navbar.astro
 ---
 
-<header class="sticky top-0 z-50 border-b border-slate-800/80 shadow-lg custom-header">
-  <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-    <a href="/" class="flex items-center gap-3">
-      <!-- Reemplazamos el componente Image por una etiqueta img estándar -->
-      <img 
-        src="/images/logo.png" 
-        alt="SysArmor Tech Logo" 
-        class="h-12 w-auto object-contain rounded-md" 
-        width="48" 
-        height="48" 
-      />
-      <span class="text-xl font-bold tracking-wider text-white uppercase">
-        SYSARMOR <span class="text-blue-500">TECH</span>
-      </span>
-    </a>
-    
-    <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
-      <a href="#servicios" class="hover:text-white transition-colors">Servicios</a>
-      <a href="#problema" class="hover:text-white transition-colors">Enfoque Técnico</a>
-      <a href="#casos" class="hover:text-white transition-colors">Casos de Éxito</a>
-      <a href="#faq" class="hover:text-white transition-colors">FAQ</a>
-      <a href="#contacto" class="hover:text-white transition-colors">Contacto</a>
-    </nav>
-    
-    <div>
-      <a href="#contacto" class="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold transition-colors shadow-sm">
-        Evaluación Gratuita
-      </a>
-    </div>
+<nav class="py-6 px-6 border-b border-slate-700/50 flex items-center justify-between bg-[#0a1628]">
+  <!-- Logo y Marca -->
+  <a href="/" class="flex items-center gap-3">
+    <img src="/images/logo.png" alt="SysArmor Tech Logo" class="h-10 w-auto" />
+    <span class="text-xl font-bold tracking-tight text-white">
+      SYSARMOR <span class="text-blue-500">TECH</span>
+    </span>
+  </a>
+
+  <!-- Menú de Navegación Completo -->
+  <div class="hidden md:flex items-center gap-6 text-slate-300 font-medium">
+    <a href="/#servicios" class="hover:text-white transition-colors">Servicios</a>
+    <a href="/#enfoque-tecnico" class="hover:text-white transition-colors">Enfoque Técnico</a>
+    <a href="/#casos-de-exito" class="hover:text-white transition-colors">Casos de Éxito</a>
+    <a href="/#faq" class="hover:text-white transition-colors">FAQ</a>
+    <a href="/#contacto" class="hover:text-white transition-colors">Contacto</a>
   </div>
-</header>
+
+  <!-- Botón CTA -->
+  <a href="/#contacto" class="px-5 py-2 rounded-lg bg-yellow-500 hover:bg-yellow-600 text-white font-bold transition-all">
+    Evaluación Gratuita
+  </a>
+</nav>

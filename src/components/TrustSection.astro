@@ -1,0 +1,27 @@
+---
+// src/components/TrustSection.astro
+const skills = [
+  { icon: "💻", name: "Windows Server / AD" },
+  { icon: "☁️", name: "GCP Cloud Eng." },
+  { icon: "🔒", name: "Azure AZ-700 / 104" },
+  { icon: "🛡️", name: "MS-500 / MS-100" },
+  { icon: "📜", name: "MCSE / ITIL V3" },
+];
+---
+
+<section class="py-20 bg-slate-50 px-4 border-y border-slate-200">
+  <div class="max-w-6xl mx-auto space-y-12 text-center">
+    <h2 class="text-4xl font-bold text-slate-900">Expertise Técnico & Certificaciones</h2>
+    <p class="text-slate-600 max-w-2xl mx-auto">Tecnologías y marcos de trabajo que domino para garantizar la resiliencia de tu infraestructura.</p>
+    
+    <!-- Grid mejorado para que los 5 items se vean bien -->
+    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
+      {skills.map((skill) => (
+        <div class="p-6 bg-white border border-slate-200 rounded-xl shadow-sm hover:border-blue-500 transition-colors">
+          <div class="text-3xl mb-3">{skill.icon}</div>
+          <span class="block font-semibold text-slate-800">{skill.name}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
