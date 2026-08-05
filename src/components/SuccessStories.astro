@@ -6,7 +6,7 @@ const successStories = [
   {
     category: "SECOPS & ENDPOINT SECURITY",
     title: "Blindaje ASR en +500 Dispositivos",
-    description: "Despliegue de políticas avanzadas de Attack Surface Reduction (ASR) y afinamiento en Defender para entidad pública. Visibilidad total de amenazas y reducción del 5% en falsos positivos."
+    description: "Despliegue de políticas avanzadas de Attack Surface Reduction (ASR) y afinamiento en Defender para entidad pública. Reducción drástica de la superficie de ataque y contención inmediata de vectores de riesgo."
   },
   {
     category: "IDENTITY & CLOUD SECURITY",
@@ -21,13 +21,14 @@ const successStories = [
 ];
 ---
 
-<section id="casos-de-exito" class="py-20 bg-slate-100 border-t border-slate-200 px-4">
+<!-- scroll-mt-24 previene que el nav fijo oculte el título -->
+<section id="casos-de-exito" class="py-20 bg-slate-100 border-t border-slate-200 px-4 scroll-mt-24">
   <div class="max-w-6xl mx-auto space-y-12">
     
     <!-- Título de Sección -->
     <div class="text-center space-y-2">
-      <h2 class="text-3xl font-display font-bold text-neutral-900">Casos de Éxito Destacados</h2>
-      <p class="text-neutral-600">Proyectos reales con impacto medible en seguridad y operación.</p>
+      <h2 class="text-3xl font-display font-bold text-neutral-900 uppercase tracking-wide">Casos de Éxito Destacados</h2>
+      <p class="text-slate-700 font-medium text-base">Proyectos reales con impacto medible en seguridad y operación.</p>
     </div>
 
     <!-- Grid de Casos -->
@@ -40,7 +41,7 @@ const successStories = [
           <h3 class="text-xl font-display font-bold text-neutral-900 mb-4">
             {story.title}
           </h3>
-          <p class="text-neutral-600 text-sm leading-relaxed font-sans">
+          <p class="text-slate-700 text-sm leading-relaxed font-sans font-normal">
             {story.description}
           </p>
         </div>
