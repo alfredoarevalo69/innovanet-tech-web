@@ -114,7 +114,6 @@
 
     const formData = new FormData(form);
     
-    // Mapeamos los datos en formato JSON para que coincidan exactamente con el backend
     const dataPayload = {
       nombre: formData.get('fullName'),
       correo: formData.get('email'),
@@ -136,20 +135,20 @@
         successMessage?.classList.remove('hidden');
       } else {
         alert(result.message || "Ocurrió un error al procesar la solicitud.");
+        resetButton();
       }
     } catch (error) {
       console.error("Error de envío:", error);
       alert("Error de conexión al servidor.");
-    } else { // (Nota: En el finally se limpia el estado)
-    } finally {
-      // Si fue exitoso, mantenemos el formulario oculto; si falló, restauramos el botón
-      if (successMessage?.classList.contains('hidden')) {
-        if (submitBtn && btnText && btnSpinner) {
-          submitBtn.disabled = false;
-          btnText.textContent = 'Enviar PDF a mi Correo';
-          btnSpinner.classList.add('hidden');
-        }
-      }
+      resetButton();
     }
   });
+
+  function resetButton() {
+    if (submitBtn && btnText && btnSpinner) {
+      submitBtn.disabled = false;
+      btnText.textContent = 'Enviar PDF a mi Correo';
+      btnSpinner.classList.add('hidden');
+    }
+  }
 </script>
