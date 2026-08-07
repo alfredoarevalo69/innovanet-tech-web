@@ -48,7 +48,8 @@
       <input 
         type="checkbox" 
         id="consent" 
-        name="consent"
+        name="aceptaOfertas"
+        value="Sí"
         required 
         class="mt-1 rounded border-slate-700 bg-slate-950 text-[#D4AF37] focus:ring-[#D4AF37] focus:ring-offset-slate-900"
       />
@@ -70,7 +71,6 @@
     </button>
   </form>
 
-  <!-- Sección de descarga sin redirección conflictiva -->
   <div id="download-section" class="hidden pt-4 border-t border-slate-800 text-center space-y-3">
     <p class="text-xs text-emerald-400 font-medium">¡Datos registrados y verificados con éxito!</p>
     <a 
@@ -112,22 +112,16 @@
       }
 
       const formData = new FormData(form);
-      const data = {
-        fecha: new Date().toISOString(),
-        nombre: formData.get('nombre'),
-        correo: formData.get('correo'),
-        empresa: formData.get('empresa'),
-        aceptaOfertas: formData.get('consent') ? 'Sí' : 'No'
-      };
+      
+      // Añadir la fecha actual al conjunto de datos
+      formData.append('fecha', new Date().toLocaleString());
 
       try {
+        // Usamos URLSearchParams para asegurar compatibilidad absoluta con Google Apps Script por POST
         await fetch(GOOGLE_SCRIPT_URL, {
           method: 'POST',
           mode: 'no-cors',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data)
+          body: new URLSearchParams(formData as any)
         });
       } catch (error) {
         console.error('Error al registrar lead:', error);
