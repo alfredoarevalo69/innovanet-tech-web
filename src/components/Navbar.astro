@@ -11,7 +11,7 @@
         </span>
     </a>
 
-    <!-- Menú Desktop -->
+    <!-- Menú Desktop (Limpio y centrado en la navegación principal) -->
     <div class="hidden md:flex items-center gap-8 text-slate-300 font-medium">
         <a href="/#servicios" class="group relative hover:text-white transition-colors duration-300">
             Servicios
@@ -29,28 +29,6 @@
             Contacto
             <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#D4AF37] transition-all duration-300 group-hover:w-full"></span>
         </a>
-
-        <!-- Enlace Guía Server 2025 con Tooltip y Disparador de Modal -->
-        <div class="relative group py-2">
-            <button 
-                type="button"
-                onclick="window.dispatchEvent(new CustomEvent('open-lead-modal'))" 
-                class="text-[#D4AF37] hover:text-white transition-colors duration-300 flex items-center gap-1.5 font-semibold bg-transparent border-none cursor-pointer p-0"
-            >
-                <span>Guía Server 2025</span>
-                <span class="text-[10px] bg-[#D4AF37]/20 border border-[#D4AF37]/40 px-1.5 py-0.5 rounded text-[#D4AF37]">
-                    Gratis
-                </span>
-            </button>
-            
-            <!-- Cuadro flotante (Tooltip) en Desktop -->
-            <div class="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-64 p-3 bg-slate-900 border border-slate-700 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 text-left pointer-events-none">
-                <p class="text-xs font-bold text-white mb-1">Guía de Migración & Scripts</p>
-                <p class="text-[11px] text-slate-400 leading-relaxed">
-                    Aprende paso a paso a reemplazar un DC defectuoso y migrar a Windows Server 2025 de forma desatendida.
-                </p>
-            </div>
-        </div>
         
         <!-- Botón CTA -->
         <a href="/#contacto" class="px-6 py-2.5 rounded-md bg-[#D4AF37] hover:bg-white text-[#020617] font-bold transition-all shadow-[0_0_15px_rgba(212,175,55,0.3)] hover:shadow-[0_0_20px_rgba(255,255,255,0.2)]">
@@ -72,21 +50,6 @@
     <a href="/#enfoque-tecnico" class="text-white hover:text-[#D4AF37] py-2">Enfoque Técnico</a>
     <a href="/#casos-de-exito" class="text-white hover:text-[#D4AF37] py-2">Casos de Éxito</a>
     <a href="/#contacto" class="text-white hover:text-[#D4AF37] py-2">Contacto</a>
-    
-    <!-- Opción móvil de la Guía -->
-    <button 
-        type="button"
-        onclick="window.dispatchEvent(new CustomEvent('open-lead-modal'))" 
-        class="text-[#D4AF37] font-semibold py-3 border-y border-slate-800 flex flex-col items-center justify-center gap-1 bg-transparent border-x-0 w-full cursor-pointer"
-    >
-        <div class="flex items-center gap-2">
-            <span>Guía Server 2025</span>
-            <span class="text-xs bg-[#D4AF37]/20 border border-[#D4AF37]/40 px-2 py-0.5 rounded text-[#D4AF37]">
-                Gratis
-            </span>
-        </div>
-        <span class="text-xs text-slate-400 font-normal">PDF + Scripts de Automatización PowerShell</span>
-    </button>
 
     <a href="/#contacto" class="mt-2 px-5 py-4 rounded-lg bg-[#D4AF37] text-[#020617] font-bold text-lg hover:bg-white transition-colors">
         Evaluación Gratuita
@@ -97,21 +60,12 @@
     const btn = document.getElementById('menu-btn');
     const menu = document.getElementById('mobile-menu');
 
-    // Toggle menú
     btn?.addEventListener('click', () => {
         menu?.classList.toggle('hidden');
     });
 
-    // Cerrar al clickear enlaces (excepto botones que abren modales)
     menu?.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', () => {
-            menu?.classList.add('hidden');
-        });
-    });
-
-    // Cerrar menú móvil también al hacer clic en el botón de la guía en mobile
-    menu?.querySelectorAll('button').forEach(btnEl => {
-        btnEl.addEventListener('click', () => {
             menu?.classList.add('hidden');
         });
     });
