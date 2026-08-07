@@ -49,7 +49,6 @@
         type="checkbox" 
         id="consent" 
         name="aceptaOfertas"
-        value="Sí"
         required 
         class="mt-1 rounded border-slate-700 bg-slate-950 text-[#D4AF37] focus:ring-[#D4AF37] focus:ring-offset-slate-900"
       />
@@ -98,8 +97,7 @@
   const btnText = document.getElementById('btn-text');
   const btnSpinner = document.getElementById('btn-spinner');
 
-  // REEMPLAZA ESTA URL CON TU URL DE WEB APP DE GOOGLE APPS SCRIPT
-  const GOOGLE_SCRIPT_URL = 'TU_URL_DE_GOOGLE_APPS_SCRIPT_AQUI';
+  const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyEpHpTu-pR_zeP7emUlxokosRotexwBMl09q1nRdQmu2pjUUGYj_pi_QP4E6I_Ql94/exec';
 
   if (form && downloadSection) {
     form.addEventListener('submit', async (e) => {
@@ -112,16 +110,22 @@
       }
 
       const formData = new FormData(form);
+      const urlEncodedData = new URLSearchParams();
       
-      // Añadir la fecha actual al conjunto de datos
-      formData.append('fecha', new Date().toLocaleString());
+      urlEncodedData.append('fecha', new Date().toLocaleString());
+      urlEncodedData.append('nombre', formData.get('nombre')?.toString() || '');
+      urlEncodedData.append('correo', formData.get('correo')?.toString() || '');
+      urlEncodedData.append('empresa', formData.get('empresa')?.toString() || '');
+      urlEncodedData.append('aceptaOfertas', formData.get('aceptaOfertas') ? 'SÍ' : 'NO');
 
       try {
-        // Usamos URLSearchParams para asegurar compatibilidad absoluta con Google Apps Script por POST
         await fetch(GOOGLE_SCRIPT_URL, {
           method: 'POST',
           mode: 'no-cors',
-          body: new URLSearchParams(formData as any)
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: urlEncodedData.toString()
         });
       } catch (error) {
         console.error('Error al registrar lead:', error);
