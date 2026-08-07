@@ -11,7 +11,7 @@
     </p>
   </div>
 
-  <!-- Mensaje de Confirmación con Descarga Directa -->
+  <!-- Mensaje de Confirmación con Descarga y Redirección Automática -->
   <div id="success-message" class="hidden bg-slate-800/90 border border-[#D4AF37]/50 rounded-xl p-6 text-center space-y-4 shadow-xl">
     <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-green-500/20 text-green-500 mb-2">
       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -20,21 +20,20 @@
     </div>
     <h4 class="text-lg font-bold text-white">¡Solicitud Procesada con Éxito!</h4>
     <p class="text-slate-300 text-sm leading-relaxed">
-      Tus datos han sido registrados correctamente. Ya puedes descargar tu recurso técnico a continuación:
+      Tu descarga ha comenzado. Serás redirigido al inicio en unos segundos...
     </p>
     
-    <!-- Botón de Descarga Directa (Ruta corregida con el nombre exacto y mayúsculas) -->
     <div class="pt-2">
       <a 
         id="btn-descarga-directa"
         href="/Guia_Migracion_Server_2025.pdf" 
         download="Guia_Migracion_Server_2025.pdf"
-        class="inline-flex items-center justify-center gap-2 w-full py-3 px-6 bg-[#D4AF37] hover:bg-white text-[#020617] font-bold rounded-lg transition-all duration-200 shadow-[0_0_15px_rgba(212,175,55,0.2)] hover:shadow-[0_0_20px_rgba(255,255,255,0.3)]"
+        class="inline-flex items-center justify-center gap-2 w-full py-3 px-6 bg-[#D4AF37] hover:bg-white text-[#020617] font-bold rounded-lg transition-all duration-200 shadow-[0_0_15px_rgba(212,175,55,0.2)]"
       >
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
         </svg>
-        Descargar Guía y Scripts Ahora
+        Descargar Nuevamente
       </a>
     </div>
   </div>
@@ -82,7 +81,7 @@
       />
     </div>
 
-    <!-- Checkbox Legal -->
+    <!-- Checkbox Legal Obligatorio -->
     <div class="flex items-center gap-2 pt-1">
       <input 
         type="checkbox" 
@@ -116,6 +115,7 @@
   const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
   const btnText = document.getElementById('btn-text');
   const btnSpinner = document.getElementById('btn-spinner');
+  const downloadBtn = document.getElementById('btn-descarga-directa') as HTMLAnchorElement;
 
   form?.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -144,6 +144,17 @@
       if (response.ok) {
         form.classList.add('hidden');
         successMessage?.classList.remove('hidden');
+
+        // Disparar la descarga automáticamente de forma limpia
+        if (downloadBtn) {
+          downloadBtn.click();
+        }
+
+        // Redirigir al inicio después de 4 segundos para dar tiempo a la descarga
+        setTimeout(() => {
+          window.location.href = "/";
+        }, 4000);
+
       } else {
         alert("Ocurrió un error. Por favor intenta de nuevo.");
         resetButton();
