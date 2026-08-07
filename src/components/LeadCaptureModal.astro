@@ -3,15 +3,15 @@
 ---
 
 <div class="w-full">
-  <!-- Encabezado actualizado -->
+  <!-- Encabezado -->
   <div class="text-center md:text-left mb-6">
     <h3 class="text-2xl font-bold text-white mb-2">Solicitar Recurso Técnico</h3>
     <p class="text-slate-400 text-sm">
-      Ingresa tus datos para acceder de forma inmediata a la guía PDF y los scripts de PowerShell.
+      Ingresa tus datos para acceder de forma inmediata a la guía PDF y a la batería de scripts de PowerShell.
     </p>
   </div>
 
-  <!-- Mensaje de Confirmación y Descarga Directa -->
+  <!-- Mensaje de Confirmación con Descarga Directa -->
   <div id="success-message" class="hidden bg-slate-800/90 border border-[#D4AF37]/50 rounded-xl p-6 text-center space-y-4 shadow-xl">
     <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-green-500/20 text-green-500 mb-2">
       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -20,7 +20,7 @@
     </div>
     <h4 class="text-lg font-bold text-white">¡Solicitud Procesada con Éxito!</h4>
     <p class="text-slate-300 text-sm leading-relaxed">
-      Tus datos han sido registrados correctamente en el sistema. Ya puedes descargar tu recurso técnico a continuación:
+      Tus datos han sido registrados correctamente. Ya puedes descargar tu recurso técnico a continuación:
     </p>
     
     <!-- Botón de Descarga Directa -->
@@ -29,7 +29,7 @@
         id="btn-descarga-directa"
         href="/guia-migracion-windows-server-2025.pdf" 
         download="Guia_Migracion_Server_2025.pdf"
-        class="inline-flex items-center justify-center gap-2 w-full py-3 px-6 bg-[#D4AF37] hover:bg-white text-[#020617] font-bold rounded-lg transition-all duration-200 shadow-[0_0_15px_rgba(212,175,55,0.2)]"
+        class="inline-flex items-center justify-center gap-2 w-full py-3 px-6 bg-[#D4AF37] hover:bg-white text-[#020617] font-bold rounded-lg transition-all duration-200 shadow-[0_0_15px_rgba(212,175,55,0.2)] hover:shadow-[0_0_20px_rgba(255,255,255,0.3)]"
       >
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
@@ -82,7 +82,7 @@
       />
     </div>
 
-    <!-- Checkbox de Aprobación Legal -->
+    <!-- Checkbox Legal -->
     <div class="flex items-center gap-2 pt-1">
       <input 
         type="checkbox" 
@@ -117,8 +117,6 @@
   const btnText = document.getElementById('btn-text');
   const btnSpinner = document.getElementById('btn-spinner');
 
-  const ENDPOINT = "/api/send-lead";
-
   form?.addEventListener('submit', async (e) => {
     e.preventDefault();
 
@@ -129,38 +127,29 @@
     }
 
     const formData = new FormData(form);
-    
     const dataPayload = {
       nombre: formData.get('fullName'),
       correo: formData.get('email'),
       empresa: formData.get('company') || 'N/A',
-      aceptaOfertas: (document.getElementById('aceptaOfertas') as HTMLInputElement)?.checked || false
+      aceptaOfertas: (document.getElementById('aceptaOfertas') as HTMLInputElement)?.checked
     };
 
     try {
-      const response = await fetch(ENDPOINT, {
+      const response = await fetch("/api/send-lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(dataPayload)
       });
 
-      const result = await response.json();
-
-      if (response.ok && result.success) {
+      if (response.ok) {
         form.classList.add('hidden');
         successMessage?.classList.remove('hidden');
-
-        if (result.urlDescarga) {
-          const downloadBtn = document.getElementById('btn-descarga-directa') as HTMLAnchorElement;
-          if (downloadBtn) downloadBtn.href = result.urlDescarga;
-        }
       } else {
-        alert(result.message || "Ocurrió un error al procesar la solicitud.");
+        alert("Ocurrió un error. Por favor intenta de nuevo.");
         resetButton();
       }
     } catch (error) {
-      console.error("Error de envío:", error);
-      alert("Error de conexión al servidor.");
+      alert("Error de conexión.");
       resetButton();
     }
   });
