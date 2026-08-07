@@ -19,19 +19,27 @@ const {
 
 const canonicalURL = new URL(Astro.url.pathname, 'https://sysarmortech.com');
 
-// Datos estructurados Schema.org para autoridad de marca y SEO local/técnico
+// Datos estructurados Schema.org optimizados para autoridad de marca y alcance regional
 const schemaOrgData = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
   "name": "SysArmor Tech",
+  "alternateName": "SysArmorTech",
   "url": "https://sysarmortech.com",
   "logo": "https://sysarmortech.com/favicon.png",
+  "image": "https://sysarmortech.com/favicon.png",
   "description": description,
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Bogotá",
-    "addressCountry": "CO"
+  "areaServed": {
+    "@type": "AdministrativeArea",
+    "name": "Bogotá, Colombia"
   },
+  "serviceType": [
+    "Infraestructura IT",
+    "SecOps",
+    "Active Directory",
+    "Windows Server",
+    "Hardening"
+  ],
   "priceRange": "$$$"
 };
 ---
@@ -54,6 +62,7 @@ const schemaOrgData = {
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={Astro.url} />
+    <meta property="og:image" content="https://sysarmortech.com/favicon.png" />
 
     <!-- Schema.org JSON-LD -->
     <script type="application/ld+json" set:html={JSON.stringify(schemaOrgData)} />
