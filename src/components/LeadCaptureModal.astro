@@ -1,0 +1,126 @@
+---
+// src/components/LeadCaptureModal.astro
+---
+
+<div class="w-full">
+  <div class="text-center md:text-left mb-6">
+    <h3 class="text-2xl font-bold text-white mb-2">Solicitar Recurso Técnico</h3>
+    <p class="text-slate-400 text-sm">
+      Ingresa tu correo corporativo. Te enviaremos la guía PDF y la batería de scripts de PowerShell directamente a tu bandeja de entrada.
+    </p>
+  </div>
+
+  <!-- Mensaje de Confirmación de Envío (Oculto por defecto) -->
+  <div id="success-message" class="hidden bg-slate-800/90 border border-[#D4AF37]/50 rounded-xl p-6 text-center space-y-4 shadow-xl">
+    <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-[#D4AF37]/20 text-[#D4AF37] mb-2">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+      </svg>
+    </div>
+    <h4 class="text-lg font-bold text-white">¡Solicitud Procesada!</h4>
+    <p class="text-slate-300 text-sm leading-relaxed">
+      Hemos enviado el enlace de descarga a tu correo corporativo. Por favor, revisa tu bandeja de entrada (y la carpeta de spam o correo no deseado por si acaso).
+    </p>
+  </div>
+
+  <!-- Formulario de Captura -->
+  <form id="lead-capture-form" class="space-y-4">
+    <div>
+      <label for="fullName" class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
+        Nombre Completo *
+      </label>
+      <input 
+        type="text" 
+        id="fullName" 
+        name="fullName" 
+        required 
+        placeholder="Ej. Carlos Pérez" 
+        class="w-full bg-slate-800/80 border border-slate-700/80 rounded-lg px-4 py-3 text-slate-100 text-sm focus:outline-none focus:border-[#D4AF37] focus:ring-1 focus:ring-[#D4AF37] transition-all placeholder:text-slate-500"
+      />
+    </div>
+
+    <div>
+      <label for="email" class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
+        Correo Corporativo *
+      </label>
+      <input 
+        type="email" 
+        id="email" 
+        name="email" 
+        required 
+        placeholder="carlos@empresa.com" 
+        class="w-full bg-slate-800/80 border border-slate-700/80 rounded-lg px-4 py-3 text-slate-100 text-sm focus:outline-none focus:border-[#D4AF37] focus:ring-1 focus:ring-[#D4AF37] transition-all placeholder:text-slate-500"
+      />
+    </div>
+
+    <div>
+      <label for="company" class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">
+        Empresa / Organización <span class="text-slate-500 font-normal">(Opcional)</span>
+      </label>
+      <input 
+        type="text" 
+        id="company" 
+        name="company" 
+        placeholder="Ej. SysArmor Tech" 
+        class="w-full bg-slate-800/80 border border-slate-700/80 rounded-lg px-4 py-3 text-slate-100 text-sm focus:outline-none focus:border-[#D4AF37] focus:ring-1 focus:ring-[#D4AF37] transition-all placeholder:text-slate-500"
+      />
+    </div>
+
+    <button 
+      type="submit" 
+      id="submit-btn"
+      class="w-full py-3.5 px-6 bg-[#D4AF37] hover:bg-white text-[#020617] font-bold rounded-lg transition-all duration-200 shadow-[0_0_15px_rgba(212,175,55,0.2)] hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] flex items-center justify-center gap-2"
+    >
+      <span id="btn-text">Enviar PDF a mi Correo</span>
+      <svg id="btn-spinner" class="hidden animate-spin h-5 w-5 text-[#020617]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+      </svg>
+    </button>
+  </form>
+</div>
+
+<script>
+  const form = document.getElementById('lead-capture-form') as HTMLFormElement;
+  const successMessage = document.getElementById('success-message');
+  const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
+  const btnText = document.getElementById('btn-text');
+  const btnSpinner = document.getElementById('btn-spinner');
+
+  const ENDPOINT = "/api/send-lead";
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    if (submitBtn && btnText && btnSpinner) {
+      submitBtn.disabled = true;
+      btnText.textContent = 'Procesando...';
+      btnSpinner.classList.remove('hidden');
+    }
+
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch(ENDPOINT, {
+        method: "POST",
+        body: formData
+      });
+
+      if (response.ok) {
+        form.classList.add('hidden');
+        successMessage?.classList.remove('hidden');
+      } else {
+        alert("Ocurrió un error al procesar la solicitud. Por favor intenta de nuevo.");
+      }
+    } catch (error) {
+      console.error("Error de envío:", error);
+      alert("Error de conexión al servidor.");
+    } finally {
+      if (submitBtn && btnText && btnSpinner) {
+        submitBtn.disabled = false;
+        btnText.textContent = 'Enviar PDF a mi Correo';
+        btnSpinner.classList.add('hidden');
+      }
+    }
+  });
+</script>

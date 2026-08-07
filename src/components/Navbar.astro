@@ -1,5 +1,5 @@
----
 // src/components/Navbar.astro
+---
 ---
 
 <nav class="sticky top-0 z-50 bg-[#020617]/95 backdrop-blur-md border-b border-slate-700/50 py-4 px-6 flex items-center justify-between">
@@ -7,7 +7,7 @@
     <a href="/" class="flex items-center gap-3">
         <img src="/images/logo.png" alt="SysArmor Tech Logo" class="h-10 w-auto" />
         <span class="text-xl font-bold tracking-tight text-white">
-          SYSARMOR <span class="text-[#D4AF37]">TECH</span>
+            SYSARMOR <span class="text-[#D4AF37]">TECH</span>
         </span>
     </a>
 
@@ -27,6 +27,15 @@
         </a>
         <a href="/#contacto" class="group relative hover:text-white transition-colors duration-300">
             Contacto
+            <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#D4AF37] transition-all duration-300 group-hover:w-full"></span>
+        </a>
+
+        <!-- Nuevo Enlace: Recurso / Guía PDF -->
+        <a href="/descarga-guia" class="group relative text-[#D4AF37] hover:text-white transition-colors duration-300 flex items-center gap-1.5 font-semibold">
+            <span>Guía PDF</span>
+            <span class="text-[10px] bg-[#D4AF37]/20 border border-[#D4AF37]/40 px-1.5 py-0.5 rounded text-[#D4AF37]">
+                Gratis
+            </span>
             <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#D4AF37] transition-all duration-300 group-hover:w-full"></span>
         </a>
         
@@ -50,7 +59,16 @@
     <a href="/#enfoque-tecnico" class="text-white hover:text-[#D4AF37] py-2">Enfoque Técnico</a>
     <a href="/#casos-de-exito" class="text-white hover:text-[#D4AF37] py-2">Casos de Éxito</a>
     <a href="/#contacto" class="text-white hover:text-[#D4AF37] py-2">Contacto</a>
-    <a href="/#contacto" class="mt-4 px-5 py-4 rounded-lg bg-[#D4AF37] text-[#020617] font-bold text-lg hover:bg-white transition-colors">
+    
+    <!-- Opción móvil de la Guía -->
+    <a href="/descarga-guia" class="text-[#D4AF37] font-semibold py-2 border-y border-slate-800 flex items-center justify-center gap-2">
+        <span>Guía PDF Hardening</span>
+        <span class="text-xs bg-[#D4AF37]/20 border border-[#D4AF37]/40 px-2 py-0.5 rounded text-[#D4AF37]">
+            Gratis
+        </span>
+    </a>
+
+    <a href="/#contacto" class="mt-2 px-5 py-4 rounded-lg bg-[#D4AF37] text-[#020617] font-bold text-lg hover:bg-white transition-colors">
         Evaluación Gratuita
     </a>
 </div>
@@ -67,7 +85,7 @@
     // Cerrar al clickear enlaces
     menu?.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', () => {
-            menu.classList.add('hidden');
+            menu?.classList.add('hidden');
         });
     });
 </script>
