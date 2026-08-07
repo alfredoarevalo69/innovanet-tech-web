@@ -15,6 +15,7 @@
       <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">Nombre Completo</label>
       <input 
         type="text" 
+        name="nombre"
         required 
         placeholder="Ej. Carlos Mendoza" 
         class="w-full px-4 py-3 bg-slate-950/60 border border-slate-700 rounded-xl text-white placeholder-slate-500 text-sm focus:outline-none focus:border-[#D4AF37] focus:ring-1 focus:ring-[#D4AF37] transition-all"
@@ -25,6 +26,7 @@
       <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">Correo Electrónico Profesional</label>
       <input 
         type="email" 
+        name="correo"
         required 
         placeholder="carlos@tuempresa.com" 
         class="w-full px-4 py-3 bg-slate-950/60 border border-slate-700 rounded-xl text-white placeholder-slate-500 text-sm focus:outline-none focus:border-[#D4AF37] focus:ring-1 focus:ring-[#D4AF37] transition-all"
@@ -35,6 +37,7 @@
       <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5">Empresa / Organización</label>
       <input 
         type="text" 
+        name="empresa"
         required 
         placeholder="Ej. SysArmor Tech" 
         class="w-full px-4 py-3 bg-slate-950/60 border border-slate-700 rounded-xl text-white placeholder-slate-500 text-sm focus:outline-none focus:border-[#D4AF37] focus:ring-1 focus:ring-[#D4AF37] transition-all"
@@ -45,6 +48,7 @@
       <input 
         type="checkbox" 
         id="consent" 
+        name="consent"
         required 
         class="mt-1 rounded border-slate-700 bg-slate-950 text-[#D4AF37] focus:ring-[#D4AF37] focus:ring-offset-slate-900"
       />
@@ -55,18 +59,20 @@
 
     <button 
       type="submit" 
-      class="w-full py-3.5 px-4 bg-[#D4AF37] hover:bg-white text-slate-950 font-bold text-sm rounded-xl transition-all shadow-lg flex items-center justify-center gap-2 mt-2"
+      id="submit-btn"
+      class="w-full py-3.5 px-4 bg-[#D4AF37] hover:bg-white text-slate-950 font-bold text-sm rounded-xl transition-all shadow-lg flex items-center justify-center gap-2 mt-2 cursor-pointer"
     >
-      <span>Acceder a la Guía PDF</span>
-      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+      <span id="btn-text">Acceder a la Guía PDF</span>
+      <svg id="btn-spinner" class="w-4 h-4 animate-spin hidden" fill="none" viewBox="0 0 24 24">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
       </svg>
     </button>
   </form>
 
-  <!-- Sección de descarga con redirección automática al home/hero -->
+  <!-- Sección de descarga -->
   <div id="download-section" class="hidden pt-4 border-t border-slate-800 text-center space-y-3">
-    <p class="text-xs text-emerald-400 font-medium">¡Datos verificados con éxito!</p>
+    <p class="text-xs text-emerald-400 font-medium">¡Datos registrados y verificados con éxito!</p>
     <button 
       type="button" 
       id="download-btn"
@@ -88,27 +94,63 @@
   const form = document.getElementById('lead-form') as HTMLFormElement;
   const downloadSection = document.getElementById('download-section');
   const downloadBtn = document.getElementById('download-btn');
+  const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
+  const btnText = document.getElementById('btn-text');
+  const btnSpinner = document.getElementById('btn-spinner');
+
+  // REEMPLAZA ESTA URL CON TU URL DE WEB APP DE GOOGLE APPS SCRIPT
+  const GOOGLE_SCRIPT_URL = 'TU_URL_DE_GOOGLE_APPS_SCRIPT_AQUI';
 
   if (form && downloadSection && downloadBtn) {
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
+
+      // Mostrar estado de carga en el botón
+      if (submitBtn && btnText && btnSpinner) {
+        submitBtn.disabled = true;
+        btnText.textContent = 'Procesando...';
+        btnSpinner.classList.remove('hidden');
+      }
+
+      const formData = new FormData(form);
+      const data = {
+        fecha: new Date().toISOString(),
+        nombre: formData.get('nombre'),
+        correo: formData.get('correo'),
+        empresa: formData.get('empresa'),
+        aceptaOfertas: formData.get('consent') ? 'Sí' : 'No'
+      };
+
+      try {
+        // Enviar datos al Google Sheet (o endpoint backend)
+        await fetch(GOOGLE_SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors', // Necesario para Google Apps Script web apps estándar
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      } catch (error) {
+        console.error('Error al registrar lead:', error);
+      }
+
+      // Ocultar formulario y mostrar sección de descarga directa
       form.style.display = 'none';
       downloadSection.classList.remove('hidden');
     });
 
-    // Dispara la descarga del PDF y redirige al inicio (/) tras un breve retraso
     downloadBtn.addEventListener('click', () => {
       const pdfUrl = '/Guia_Migracion_Server_2025.pdf';
       const fileName = 'Guia_Migracion_Server_2025.pdf';
 
-      const a = document.createElement('a');
+      const a = document.implementation.hasHTMLDocument() ? document.createElement('a') : document.createElement('a');
       a.href = pdfUrl;
       a.download = fileName;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
 
-      // Redirige a la página principal después de iniciar la descarga
       setTimeout(() => {
         window.location.href = '/';
       }, 800);
