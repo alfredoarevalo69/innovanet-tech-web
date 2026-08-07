@@ -1,5 +1,5 @@
-// src/components/Navbar.astro
 ---
+// src/components/Navbar.astro
 ---
 
 <nav class="sticky top-0 z-50 bg-[#020617]/95 backdrop-blur-md border-b border-slate-700/50 py-4 px-6 flex items-center justify-between">
@@ -30,14 +30,27 @@
             <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#D4AF37] transition-all duration-300 group-hover:w-full"></span>
         </a>
 
-        <!-- Nuevo Enlace: Recurso / Guía PDF -->
-        <a href="/descarga-guia" class="group relative text-[#D4AF37] hover:text-white transition-colors duration-300 flex items-center gap-1.5 font-semibold">
-            <span>Guía PDF</span>
-            <span class="text-[10px] bg-[#D4AF37]/20 border border-[#D4AF37]/40 px-1.5 py-0.5 rounded text-[#D4AF37]">
-                Gratis
-            </span>
-            <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#D4AF37] transition-all duration-300 group-hover:w-full"></span>
-        </a>
+        <!-- Enlace Guía Server 2025 con Tooltip y Disparador de Modal -->
+        <div class="relative group py-2">
+            <button 
+                type="button"
+                onclick="window.dispatchEvent(new CustomEvent('open-lead-modal'))" 
+                class="text-[#D4AF37] hover:text-white transition-colors duration-300 flex items-center gap-1.5 font-semibold bg-transparent border-none cursor-pointer p-0"
+            >
+                <span>Guía Server 2025</span>
+                <span class="text-[10px] bg-[#D4AF37]/20 border border-[#D4AF37]/40 px-1.5 py-0.5 rounded text-[#D4AF37]">
+                    Gratis
+                </span>
+            </button>
+            
+            <!-- Cuadro flotante (Tooltip) en Desktop -->
+            <div class="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-64 p-3 bg-slate-900 border border-slate-700 rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 text-left pointer-events-none">
+                <p class="text-xs font-bold text-white mb-1">Guía de Migración & Scripts</p>
+                <p class="text-[11px] text-slate-400 leading-relaxed">
+                    Aprende paso a paso a reemplazar un DC defectuoso y migrar a Windows Server 2025 de forma desatendida.
+                </p>
+            </div>
+        </div>
         
         <!-- Botón CTA -->
         <a href="/#contacto" class="px-6 py-2.5 rounded-md bg-[#D4AF37] hover:bg-white text-[#020617] font-bold transition-all shadow-[0_0_15px_rgba(212,175,55,0.3)] hover:shadow-[0_0_20px_rgba(255,255,255,0.2)]">
@@ -61,12 +74,19 @@
     <a href="/#contacto" class="text-white hover:text-[#D4AF37] py-2">Contacto</a>
     
     <!-- Opción móvil de la Guía -->
-    <a href="/descarga-guia" class="text-[#D4AF37] font-semibold py-2 border-y border-slate-800 flex items-center justify-center gap-2">
-        <span>Guía PDF Hardening</span>
-        <span class="text-xs bg-[#D4AF37]/20 border border-[#D4AF37]/40 px-2 py-0.5 rounded text-[#D4AF37]">
-            Gratis
-        </span>
-    </a>
+    <button 
+        type="button"
+        onclick="window.dispatchEvent(new CustomEvent('open-lead-modal'))" 
+        class="text-[#D4AF37] font-semibold py-3 border-y border-slate-800 flex flex-col items-center justify-center gap-1 bg-transparent border-x-0 w-full cursor-pointer"
+    >
+        <div class="flex items-center gap-2">
+            <span>Guía Server 2025</span>
+            <span class="text-xs bg-[#D4AF37]/20 border border-[#D4AF37]/40 px-2 py-0.5 rounded text-[#D4AF37]">
+                Gratis
+            </span>
+        </div>
+        <span class="text-xs text-slate-400 font-normal">PDF + Scripts de Automatización PowerShell</span>
+    </button>
 
     <a href="/#contacto" class="mt-2 px-5 py-4 rounded-lg bg-[#D4AF37] text-[#020617] font-bold text-lg hover:bg-white transition-colors">
         Evaluación Gratuita
@@ -82,9 +102,16 @@
         menu?.classList.toggle('hidden');
     });
 
-    // Cerrar al clickear enlaces
+    // Cerrar al clickear enlaces (excepto botones que abren modales)
     menu?.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', () => {
+            menu?.classList.add('hidden');
+        });
+    });
+
+    // Cerrar menú móvil también al hacer clic en el botón de la guía en mobile
+    menu?.querySelectorAll('button').forEach(btnEl => {
+        btnEl.addEventListener('click', () => {
             menu?.classList.add('hidden');
         });
     });
