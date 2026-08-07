@@ -10,17 +10,32 @@
     </p>
   </div>
 
-  <!-- Mensaje de Confirmación de Envío (Oculto por defecto) -->
+  <!-- Mensaje de Confirmación y Descarga (Oculto por defecto) -->
   <div id="success-message" class="hidden bg-slate-800/90 border border-[#D4AF37]/50 rounded-xl p-6 text-center space-y-4 shadow-xl">
     <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-[#D4AF37]/20 text-[#D4AF37] mb-2">
       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
       </svg>
     </div>
-    <h4 class="text-lg font-bold text-white">¡Solicitud Procesada!</h4>
+    <h4 class="text-lg font-bold text-white">¡Solicitud Procesada con Éxito!</h4>
     <p class="text-slate-300 text-sm leading-relaxed">
-      Hemos enviado el enlace de descarga a tu correo corporativo. Por favor, revisa tu bandeja de entrada (y la carpeta de spam o correo no deseado por si acaso).
+      Hemos registrado tus datos correctamente. También te hemos enviado una copia a tu correo.
     </p>
+    
+    <!-- Botón de Descarga Directa -->
+    <div class="pt-2">
+      <a 
+        id="btn-descarga-directa"
+        href="/guia-migracion-windows-server-2025.pdf" 
+        download
+        class="inline-flex items-center justify-center gap-2 w-full py-3 px-6 bg-[#D4AF37] hover:bg-white text-[#020617] font-bold rounded-lg transition-all duration-200 shadow-[0_0_15px_rgba(212,175,55,0.2)]"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+        </svg>
+        Descargar Guía y Scripts Ahora
+      </a>
+    </div>
   </div>
 
   <!-- Formulario de Captura -->
@@ -133,6 +148,11 @@
       if (response.ok && result.success) {
         form.classList.add('hidden');
         successMessage?.classList.remove('hidden');
+
+        if (result.urlDescarga) {
+          const downloadBtn = document.getElementById('btn-descarga-directa') as HTMLAnchorElement;
+          if (downloadBtn) downloadBtn.href = result.urlDescarga;
+        }
       } else {
         alert(result.message || "Ocurrió un error al procesar la solicitud.");
         resetButton();
