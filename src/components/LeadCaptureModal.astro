@@ -66,6 +66,20 @@
       />
     </div>
 
+    <!-- Checkbox de Aprobación Legal -->
+    <div class="flex items-center gap-2 pt-1">
+      <input 
+        type="checkbox" 
+        id="aceptaOfertas" 
+        name="aceptaOfertas"
+        required
+        class="w-4 h-4 rounded bg-slate-800 border-slate-700 text-[#D4AF37] focus:ring-[#D4AF37]"
+      />
+      <label for="aceptaOfertas" class="text-xs text-slate-400 select-none">
+        Acepto recibir recursos técnicos y comunicaciones de SysArmor Tech.
+      </label>
+    </div>
+
     <button 
       type="submit" 
       id="submit-btn"
@@ -99,27 +113,42 @@
     }
 
     const formData = new FormData(form);
+    
+    // Mapeamos los datos en formato JSON para que coincidan exactamente con el backend
+    const dataPayload = {
+      nombre: formData.get('fullName'),
+      correo: formData.get('email'),
+      empresa: formData.get('company') || 'N/A',
+      aceptaOfertas: (document.getElementById('aceptaOfertas') as HTMLInputElement)?.checked || false
+    };
 
     try {
       const response = await fetch(ENDPOINT, {
         method: "POST",
-        body: formData
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(dataPayload)
       });
 
-      if (response.ok) {
+      const result = await response.json();
+
+      if (response.ok && result.success) {
         form.classList.add('hidden');
         successMessage?.classList.remove('hidden');
       } else {
-        alert("Ocurrió un error al procesar la solicitud. Por favor intenta de nuevo.");
+        alert(result.message || "Ocurrió un error al procesar la solicitud.");
       }
     } catch (error) {
       console.error("Error de envío:", error);
       alert("Error de conexión al servidor.");
+    } else { // (Nota: En el finally se limpia el estado)
     } finally {
-      if (submitBtn && btnText && btnSpinner) {
-        submitBtn.disabled = false;
-        btnText.textContent = 'Enviar PDF a mi Correo';
-        btnSpinner.classList.add('hidden');
+      // Si fue exitoso, mantenemos el formulario oculto; si falló, restauramos el botón
+      if (successMessage?.classList.contains('hidden')) {
+        if (submitBtn && btnText && btnSpinner) {
+          submitBtn.disabled = false;
+          btnText.textContent = 'Enviar PDF a mi Correo';
+          btnSpinner.classList.add('hidden');
+        }
       }
     }
   });
