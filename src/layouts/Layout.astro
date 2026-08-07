@@ -1,4 +1,5 @@
 ---
+// src/layouts/Layout.astro
 import Navbar from '../components/Navbar.astro';
 import LegalNavbar from '../components/LegalNavbar.astro';
 import Footer from '../components/Footer.astro';
@@ -17,6 +18,22 @@ const {
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, 'https://sysarmortech.com');
+
+// Datos estructurados Schema.org para autoridad de marca y SEO local/técnico
+const schemaOrgData = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "SysArmor Tech",
+  "url": "https://sysarmortech.com",
+  "logo": "https://sysarmortech.com/favicon.png",
+  "description": description,
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Bogotá",
+    "addressCountry": "CO"
+  },
+  "priceRange": "$$$"
+};
 ---
 
 <!DOCTYPE html>
@@ -34,13 +51,11 @@ const canonicalURL = new URL(Astro.url.pathname, 'https://sysarmortech.com');
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={Astro.url} />
+
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json" set:html={JSON.stringify(schemaOrgData)} />
   </head>
   
-  <!-- 
-    Layout neutro sin azules. 
-    bg-[#020617] es el color base global.
-    selection:bg-slate-500/30 asegura que al seleccionar texto sea neutro.
-  -->
   <body class="bg-[#020617] text-white selection:bg-slate-500/30">
     
     {variant === 'home' ? <Navbar /> : <LegalNavbar />}
