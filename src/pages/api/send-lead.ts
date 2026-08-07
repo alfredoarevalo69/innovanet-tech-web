@@ -18,8 +18,8 @@ export const POST: APIRoute = async ({ request }) => {
       );
     }
 
-    // URL de tu Apps Script de Google Sheets
-    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyqT4YjJRXV0z-Gv18ps9cEp8WN-FX0lvA7hhqSQ69l0clUQsdBpYEhAw7GxukEAbjc/exec';
+    // Nueva URL de tu Apps Script de Google Sheets
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyEpHpTu-pR_zeP7emUlxokosRotexwBMl09q1nRdQmu2pjUUGYj_pi_QP4E6I_Ql94/exec';
 
     const response = await fetch(GOOGLE_SCRIPT_URL, {
       method: 'POST',
