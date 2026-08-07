@@ -23,7 +23,7 @@ const successStories = [
   {
     category: "CASO PRÁCTICO & GUÍA PDF",
     title: "Cómo reemplazar un controlador de dominio defectuoso y modernizar la infraestructura minimizando la indisponibilidad",
-    description: "Sustitución de Controlador de Dominio mediante PowerShell Level 3 manteniendo IP/FQDN.",
+    description: "Windows Server 2025",
     isGuide: true,
     badge: "Gratis",
     link: "/descarga-guia",
@@ -61,7 +61,7 @@ const successStories = [
               )}
             </div>
 
-            <!-- Título con tamaño condicional: más equilibrado para la tarjeta del PDF -->
+            <!-- Título con tamaño condicional -->
             <h3 class={`font-display font-bold mb-3 transition-colors ${
               story.isGuide 
                 ? 'text-base md:text-lg text-white group-hover:text-[#D4AF37]' 
@@ -70,7 +70,7 @@ const successStories = [
               {story.title}
             </h3>
 
-            <!-- Texto de descripción detallado -->
+            <!-- Descripción simplificada -->
             <p class={`text-sm leading-relaxed font-sans font-normal mb-6 ${story.isGuide ? 'text-slate-300' : 'text-slate-700'}`}>
               {story.description}
             </p>
