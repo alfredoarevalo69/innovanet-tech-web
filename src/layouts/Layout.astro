@@ -3,6 +3,7 @@
 import Navbar from '../components/Navbar.astro';
 import LegalNavbar from '../components/LegalNavbar.astro';
 import Footer from '../components/Footer.astro';
+import Analytics from '@vercel/analytics/astro';
 import '../styles/global.css';
 
 interface Props {
@@ -77,5 +78,8 @@ const schemaOrgData = {
     </main>
     
     <Footer />
+    
+    <!-- Componente de analíticas para registrar el tráfico en Vercel -->
+    <Analytics />
   </body>
 </html>
