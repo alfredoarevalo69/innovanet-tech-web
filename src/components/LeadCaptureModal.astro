@@ -70,19 +70,20 @@
     </button>
   </form>
 
-  <!-- Sección de descarga -->
+  <!-- Sección de descarga sin redirección conflictiva -->
   <div id="download-section" class="hidden pt-4 border-t border-slate-800 text-center space-y-3">
     <p class="text-xs text-emerald-400 font-medium">¡Datos registrados y verificados con éxito!</p>
-    <button 
-      type="button" 
+    <a 
+      href="/Guia_Migracion_Server_2025.pdf" 
+      download="Guia_Migracion_Server_2025.pdf"
       id="download-btn"
       class="inline-flex items-center justify-center w-full py-3 px-4 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm rounded-xl transition-all gap-2 shadow-lg cursor-pointer"
     >
       <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
       </svg>
-      <span>Descargar PDF y Volver al Inicio</span>
-    </button>
+      <span>Descargar PDF Ahora</span>
+    </a>
   </div>
 
   <p class="text-[11px] text-center text-slate-500">
@@ -93,7 +94,6 @@
 <script>
   const form = document.getElementById('lead-form') as HTMLFormElement;
   const downloadSection = document.getElementById('download-section');
-  const downloadBtn = document.getElementById('download-btn');
   const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
   const btnText = document.getElementById('btn-text');
   const btnSpinner = document.getElementById('btn-spinner');
@@ -101,11 +101,10 @@
   // REEMPLAZA ESTA URL CON TU URL DE WEB APP DE GOOGLE APPS SCRIPT
   const GOOGLE_SCRIPT_URL = 'TU_URL_DE_GOOGLE_APPS_SCRIPT_AQUI';
 
-  if (form && downloadSection && downloadBtn) {
+  if (form && downloadSection) {
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
-      // Mostrar estado de carga en el botón
       if (submitBtn && btnText && btnSpinner) {
         submitBtn.disabled = true;
         btnText.textContent = 'Procesando...';
@@ -122,10 +121,9 @@
       };
 
       try {
-        // Enviar datos al Google Sheet (o endpoint backend)
         await fetch(GOOGLE_SCRIPT_URL, {
           method: 'POST',
-          mode: 'no-cors', // Necesario para Google Apps Script web apps estándar
+          mode: 'no-cors',
           headers: {
             'Content-Type': 'application/json',
           },
@@ -135,25 +133,8 @@
         console.error('Error al registrar lead:', error);
       }
 
-      // Ocultar formulario y mostrar sección de descarga directa
       form.style.display = 'none';
       downloadSection.classList.remove('hidden');
-    });
-
-    downloadBtn.addEventListener('click', () => {
-      const pdfUrl = '/Guia_Migracion_Server_2025.pdf';
-      const fileName = 'Guia_Migracion_Server_2025.pdf';
-
-      const a = document.implementation.hasHTMLDocument() ? document.createElement('a') : document.createElement('a');
-      a.href = pdfUrl;
-      a.download = fileName;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-
-      setTimeout(() => {
-        window.location.href = '/';
-      }, 800);
     });
   }
 </script>
